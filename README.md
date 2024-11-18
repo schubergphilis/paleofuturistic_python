@@ -16,3 +16,4 @@ Prerequisite: [uv](https://docs.astral.sh/uv/)
 ### Workflow
 
 - Format: `uvx ruff format`
+- Test: `uv run python -m unittest`
