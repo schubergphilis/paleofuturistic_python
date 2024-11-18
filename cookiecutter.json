@@ -2,5 +2,7 @@
   "project_name": "Straight to the Money",
   "project_slug": "{{ cookiecutter.project_name.lower().replace(' ', '_') }}",
   "project_description": "Let's make some money!",
-  "author_name": "The caveman who invented money"
+  "author_name": "The caveman who invented money",
+  "author_email": "man@money.cave",
+  "python_version": "3.12"
 }
