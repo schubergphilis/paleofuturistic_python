@@ -17,3 +17,5 @@ Prerequisite: [uv](https://docs.astral.sh/uv/)
 
 - Format: `uvx ruff format`
 - Test: `uv run python -m unittest`
+- Build: `uv build`
+- Publish: `uv publish`
