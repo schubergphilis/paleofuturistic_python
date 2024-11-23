@@ -20,3 +20,7 @@ Prerequisite: [uv](https://docs.astral.sh/uv/)
 - Build: `uv build`
 - Document: `uvx mkdocs build`
 - Publish: `uv publish`
+
+Can it really be that simple?
+Well, eventually yes, but you will need to set up some connections and credentials still, of course.
+For a slightly more elaborate walkthrough, see the [walkthrough](walkthrough.md).
