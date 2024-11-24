@@ -13,5 +13,6 @@ theme:
 nav:
   - Home: index.md
   - Walkthrough: walkthrough.md
+  - About: about.md
 
 copyright: Copyright &copy; 2024 <a href="https://github.com/Carlovo">Carlo 'carlovo' van Overbeek</a>
