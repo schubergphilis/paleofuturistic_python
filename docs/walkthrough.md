@@ -5,7 +5,7 @@ Let's go over those in more detail.
 
 ## Initializing your project
 
-You will probably want to manage your project with some version control system and a remote, such as git and GitHub.
+You will probably want to manage your project with some version control system and a remote, such as Git and GitHub.
 Personally, I like creating the repository in the remote and then cloning to local.
 That way everything is nicely set up for me.
 Except for the template, of course.
@@ -53,6 +53,16 @@ You can test whether everything went OK by running:
 If that works or if you just want to skip to the real deal,
 then make an account at [PyPI](https://pypi.org/) and
 [configure uv](https://docs.astral.sh/uv/guides/publish/#publishing-your-package) to publish to it the proper way.
+
+## Bonus: tinkering within context
+
+My advice: run `uv add --dev ptpython`, then run `uv run ptpython` to bathe in luxury, and accept that you just pulled in couple of not strictly necessary dependencies.
+You could simply run `uv run python` and tinker away in your virtual env, but quality of life in ptpython's REPL is simply much better.
+
+Sadly, `uvx ptpython` doesn't work here.
+It makes sense, of course, because uv's whole point is env separation.
+Still, it would have been great in this particular case.
+Maybe, hopefully, I can update this part someday with an elegant hack to make it possible.
 
 ## The updated happy path workflow
 

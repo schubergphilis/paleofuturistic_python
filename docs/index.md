@@ -28,7 +28,7 @@ Give their docs a look-over before continuing if you want to get a better unders
 
 Can it really be that simple?
 Well, eventually yes, but you will need to set up some connections and credentials still, of course.
-For a slightly more elaborate walkthrough, see the [walkthrough](walkthrough.md).
+For a slightly more elaborate walkthrough on that, see the [walkthrough](walkthrough.md).
 
 Still skeptical?
 See the [about](about.md) instead.

@@ -28,7 +28,7 @@ Give their docs a look-over before continuing if you want to get a better unders
 
 Can it really be that simple?
 Well, eventually yes, but you will need to set up some connections and credentials still, of course.
-For a slightly more elaborate walkthrough, see the [docs](https://carlovo.github.io/straight_to_the_money/walkthrough/).
+For a slightly more elaborate walkthrough on that, see the [docs](https://carlovo.github.io/straight_to_the_money/walkthrough/).
 
 Still skeptical?
 See the [about](https://carlovo.github.io/straight_to_the_money/about/) instead.
