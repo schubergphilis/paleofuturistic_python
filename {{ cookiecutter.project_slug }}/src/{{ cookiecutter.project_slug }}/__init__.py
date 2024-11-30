@@ -1,2 +1,3 @@
-def hello() -> str:
-    return "Hello from {{ cookiecutter.project_slug }}!"
+from {{ cookiecutter.project_slug }} import hello
+
+assert hello
