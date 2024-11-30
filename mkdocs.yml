@@ -2,7 +2,7 @@ site_name: Straight to the Money 💰
 site_author: Carlo 'carlovo' van Overbeek
 
 repo_url: https://github.com/Carlovo/straight_to_the_money/
-edit_uri: blob/master/docs/
+edit_uri: blob/main/docs/
 
 theme:
   name: mkdocs
