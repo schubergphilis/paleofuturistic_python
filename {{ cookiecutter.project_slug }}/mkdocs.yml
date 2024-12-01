@@ -1,1 +1,12 @@
 site_name: {{ cookiecutter.project_name }}
+site_author: {{ cookiecutter.author_name }}
+site_description: {{ cookiecutter.project_description }}
+
+theme:
+  name: mkdocs
+  color_mode: auto
+  user_color_mode_toggle: true
+  locale: en
+
+nav:
+  - Home: index.md
