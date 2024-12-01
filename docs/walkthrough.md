@@ -28,7 +28,7 @@ Other options would be:
 Are they superfluous in a minimal project template?
 Maybe.
 I would simply always add these two directly if they weren't there already, so adding them felt like a time-saver if only for myself.
-If you had wanted another license than MIT, you have probably already chosen one and can easily override the templated one.
+If you had wanted another license than MIT, you have probably already chosen one and can easily override the templated one (if you do, do it in the `pyproject.toml` as well).
 Maybe take a second look at the .gitignore, maybe not, it's fine...
 
 ## Previewing and publishing your documentation
