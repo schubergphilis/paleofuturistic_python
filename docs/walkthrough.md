@@ -83,7 +83,7 @@ Considering the publishing and all, you may want to alter the workflow in this p
 - Build: `uv build`
 - Preview documentation: `uvx mkdocs serve`
 - Publish package: `uv publish`
-- Test package upload: `uv run --with "https://test-files.pythonhosted.org/packages/XXX/XXX/XXX/straight_to_the_money-0.1.0-py3-none-any.whl" --no-project -- python -c "import straight_to_the_money;`
+- Test package upload: `uv run --with "https://test-files.pythonhosted.org/packages/XXX/XXX/XXX/straight_to_the_money-0.1.0-py3-none-any.whl" --no-project -- python -c "import straight_to_the_money;"`
 - Publish documentation: `uvx mkdocs gh-deploy`
 
 Or even better, create your own workflow that exactly caters to your project's needs.

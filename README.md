@@ -10,7 +10,8 @@ Go straight to the money 💹
 
 Prerequisite: [uv](https://docs.astral.sh/uv/)  
 (Installing uv should also provide you with uvx.
-Give their docs a look-over before continuing if you want to get a better understanding of what is going on under the hood in the steps below.)
+Give their docs a look-over before continuing if you want to get a better understanding of what is going on under the hood in the steps below..
+Also look at their docs for the parts of dependency management not covered in this template's standard flow, such as removing dependencies from your project.)
 
 ### Setup
 
@@ -32,3 +33,4 @@ For a slightly more elaborate walkthrough on that, see the [docs](https://carlov
 
 Still skeptical?
 See the [about](https://carlovo.github.io/straight_to_the_money/about/) instead.
+Or, have a look at [my kitchen sink project](https://github.com/Carlovo/straight_to_the_kitchen_sink) created with this template.
