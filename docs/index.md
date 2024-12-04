@@ -1,10 +1,13 @@
-# Straight to the Money 💰
+# Crave all the Money 🤑
 
-> _Minimalistic yet all-inclusive Python project template_
+> _Open source Python project template with enterprise-level teamwork in mind_
 
-Stop wasting time in analysis paralysis over Python tooling choices 💸  
-Pick the defaults 💱  
-Go straight to the money 💹
+Don't settle for less than a Python project template that fulfils all your development needs 🤝  
+Don't settle for less than a Python project template that uses the best tools 🛠️  
+Crave all the money 🤑
+
+This is a detached fork of [Straight to the Money 💰](https://github.com/Carlovo/straight_to_the_money).
+Check it out if this template is a bit too involved for you and you want to go with something more simple.
 
 ## Usage
 
@@ -29,8 +32,8 @@ Also look at their docs for the parts of dependency management not covered in th
 
 Can it really be that simple?
 Well, eventually yes, but you will need to set up some connections and credentials still, of course.
-For a slightly more elaborate walkthrough on that, see the [walkthrough](walkthrough.md).
+For a slightly more elaborate walkthrough on that, see the [docs](https://carlovo.github.io/straight_to_the_money/walkthrough/).
 
 Still skeptical?
-See the [about](about.md) instead.
+See the [about](https://carlovo.github.io/straight_to_the_money/about/) instead.
 Or, have a look at [my kitchen sink project](https://github.com/Carlovo/straight_to_the_kitchen_sink) created with this template.
