@@ -2,7 +2,7 @@ site_name: Straight to the Money 💰
 site_author: Carlo 'carlovo' van Overbeek
 site_description: Minimalistic yet all-inclusive Python project template
 
-repo_url: https://github.com/Carlovo/straight_to_the_money/
+repo_url: https://github.com/carlovoSBP/crave_all_the_money
 edit_uri: blob/main/docs/
 
 theme:
@@ -16,4 +16,4 @@ nav:
   - Walkthrough: walkthrough.md
   - About: about.md
 
-copyright: Copyright &copy; 2024 <a href="https://github.com/Carlovo">Carlo 'carlovo' van Overbeek</a>
+copyright: Copyright &copy; 2024 <a href="https://schubergphilis.com/">Schuberg Philis</a>
