@@ -10,7 +10,7 @@ requires-python = ">={{ cookiecutter.python_version }}"
 dependencies = []
 classifiers = [
   # License
-  "License :: OSI Approved :: MIT License",
+  "License :: OSI Approved :: Apache Software License",
 
   # Python versions supported by the package
   "Programming Language :: Python :: {{ cookiecutter.python_version }}",
