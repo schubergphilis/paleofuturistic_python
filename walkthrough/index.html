@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <meta name="author" content="Carlo 'carlovo' van Overbeek">
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>Walkthrough - Straight to the Money 💰</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../css/brands.min.css" rel="stylesheet">
+        <link href="../css/solid.min.css" rel="stylesheet">
+        <link href="../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" disabled>
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">Straight to the Money 💰</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href=".." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="./" class="nav-link active" aria-current="page">Walkthrough</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../about/" class="nav-link">About</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href=".." class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../about/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="https://github.com/carlovoSBP/crave_all_the_money/blob/main/docs/walkthrough.md" class="nav-link"><i class="fa-brands fa-github"></i> Edit on GitHub</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                              <button id="theme-menu" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static" aria-label="Toggle theme" class="nav-link dropdown-toggle">
+                                <i class="fa-solid fa-circle-half-stroke fa-fw"></i>
+                                <span class="d-lg-none ms-2">Toggle theme</span>
+                              </button>
+                              <ul class="dropdown-menu dropdown-menu-end">
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
+                                    <i class="fa-solid fa-sun fa-fw"></i>
+                                    <span class="ms-2">Light</span>
+                                    <i class="fa-solid fa-check ms-auto d-none"></i>
+                                  </button>
+                                </li>
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
+                                    <i class="fa-solid fa-moon fa-fw"></i>
+                                    <span class="ms-2">Dark</span>
+                                    <i class="fa-solid fa-check ms-auto d-none"></i>
+                                  </button>
+                                </li>
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="auto" aria-pressed="true">
+                                    <i class="fa-solid fa-circle-half-stroke fa-fw"></i>
+                                    <span class="ms-2">Auto</span>
+                                    <i class="fa-solid fa-check ms-auto"></i>
+                                  </button>
+                                </li>
+                              </ul>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <script src="../js/darkmode.js"></script>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#walkthrough" class="nav-link">Walkthrough</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#initializing-your-project" class="nav-link">Initializing your project</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#previewing-and-publishing-your-documentation" class="nav-link">Previewing and publishing your documentation</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#publishing-your-python-package" class="nav-link">Publishing your Python package</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#bonus-tinkering-within-context" class="nav-link">Bonus: tinkering within context</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#the-updated-happy-path-workflow" class="nav-link">The updated happy path workflow</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="walkthrough">Walkthrough</h1>
+<p>Some things in <a href="../#usage">usage</a> might require a little more effort on the first run.
+Let's go over those in more detail.</p>
+<h2 id="initializing-your-project">Initializing your project</h2>
+<p>You will probably want to manage your project with some version control system and a remote, such as Git and GitHub.
+Personally, I like creating the repository in the remote and then cloning to local.
+That way everything is nicely set up for me.
+Except for the template, of course.</p>
+<p><a href="https://cruft.github.io/cruft/">cruft</a> (<a href="https://cookiecutter.readthedocs.io/en/stable/">cookiecutter</a> under its hood, actually) does not allow editing an existing directory by default for safety.
+Because we just cloned an empty repository, we can assume to be safe though.
+Clone your new repository somewhere.
+From the directory directly above it run:
+<code>uvx cruft create -f https://github.com/Carlovo/straight_to_the_money</code>
+(mind the <code>-f</code>).
+cd to your project directory; git add all, commit and push; and you are ready to go.</p>
+<p>Other options would be:</p>
+<ul>
+<li>create the project with directory from the template with cruft, cd to it; git init, add all, commit, <a href="https://docs.github.com/en/get-started/getting-started-with-git/about-remote-repositories#creating-remote-repositories">set the remote</a> and push.</li>
+<li>create the project with directory from the template with cruft, copy the contents to a cloned repository; git add all, commit and push.</li>
+</ul>
+<h3 id="reviewing-gitignore-and-license">Reviewing .gitignore and LICENSE</h3>
+<p>Are they superfluous in a minimal project template?
+Maybe.
+I would simply always add these two directly if they weren't there already, so adding them felt like a time-saver if only for myself.
+If you had wanted another license than MIT, you have probably already chosen one and can easily override the templated one (if you do, do it in the <code>pyproject.toml</code> as well).
+Maybe take a second look at the .gitignore, maybe not, it's fine...</p>
+<h2 id="previewing-and-publishing-your-documentation">Previewing and publishing your documentation</h2>
+<p>So <code>uvx mkdocs build</code> nicely converts your documentation to a static website, now what?
+You will probably want to preview it before committing the source files, and when committed you will probably want to publish the build files somewhere on the web.</p>
+<p>MkDocs has two convenient commands build in for that:</p>
+<ul>
+<li><code>uvx mkdocs serve</code> will serve a preview on local host <code>http://127.0.0.1:8000/</code> (with watch files!).</li>
+<li><code>uvx mkdocs gh-deploy</code> will upload your documentation to GitHub Pages.</li>
+</ul>
+<p>Both these commands have a lot of options and MkDocs has a lot more to offer in general (including automated publishing to other hosting parties).
+<a href="https://www.mkdocs.org/">See for yourself.</a></p>
+<h2 id="publishing-your-python-package">Publishing your Python package</h2>
+<p>It's all done; time to make your work available to the masses! <code>uv publish</code> can be configured to go a lot of places, but let's just admit PyPI is the standard.</p>
+<p>For a fist time, it might be a good idea to use the <a href="https://test.pypi.org/">PyPI Test instance</a> though.
+Make an account there and get an api token.
+Then you can upload your work with:<br />
+<code>uv publish --publish-url https://test.pypi.org/legacy/ -t pypi-XXX</code>
+(replace <code>XXX</code> with your specific credentials).</p>
+<p>You can test whether everything went OK by running:<br />
+<code>uv run --with "https://test-files.pythonhosted.org/packages/XXX/XXX/XXX/straight_to_the_money-0.1.0-py3-none-any.whl" --no-project -- python -c "import straight_to_the_money; print(straight_to_the_money.hello())"</code>
+(replace <code>XXX</code> with your ids and <code>straight_to_the_money</code> to your project's name).</p>
+<p>If that works or if you just want to skip to the real deal,
+then make an account at <a href="https://pypi.org/">PyPI</a> and
+<a href="https://docs.astral.sh/uv/guides/publish/#publishing-your-package">configure uv</a> to publish to it the proper way.</p>
+<h2 id="bonus-tinkering-within-context">Bonus: tinkering within context</h2>
+<p>My advice: run <code>uv add --dev ptpython</code>, then run <code>uv run ptpython</code> to bathe in luxury, and accept that you just pulled in couple of not strictly necessary dependencies.
+You could simply run <code>uv run python</code> and tinker away in your virtual env, but quality of life in ptpython's REPL is simply much better.</p>
+<p>Sadly, <code>uvx ptpython</code> doesn't work here.
+It makes sense, of course, because uv's whole point is env separation.
+Still, it would have been great in this particular case.
+Maybe, hopefully, I can update this part someday with an elegant hack to make it possible.</p>
+<h2 id="the-updated-happy-path-workflow">The updated happy path workflow</h2>
+<p>When you completed all the above successfully, pat yourself on the back for me.
+The real reward is of course a reliable way of developing your Python project.
+Considering the publishing and all, you may want to alter the workflow in this project's introduction to something like:</p>
+<ul>
+<li>Format: <code>uvx ruff format</code></li>
+<li>Test: <code>uv run python -m unittest</code></li>
+<li>Build: <code>uv build</code></li>
+<li>Preview documentation: <code>uvx mkdocs serve</code></li>
+<li>Publish package: <code>uv publish</code></li>
+<li>Test package upload: <code>uv run --with "https://test-files.pythonhosted.org/packages/XXX/XXX/XXX/straight_to_the_money-0.1.0-py3-none-any.whl" --no-project -- python -c "import straight_to_the_money;"</code></li>
+<li>Publish documentation: <code>uvx mkdocs gh-deploy</code></li>
+</ul>
+<p>Or even better, create your own workflow that exactly caters to your project's needs.</p>
+<p>Happy coding 🤗</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+                <p>Copyright &copy; 2024 <a href="https://schubergphilis.com/">Schuberg Philis</a></p>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js"></script>
+        <script src="../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
