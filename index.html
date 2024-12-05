@@ -141,9 +141,9 @@ Give their docs a look-over before continuing if you want to get a better unders
 Also look at their docs for the parts of dependency management not covered in this template's standard flow, such as removing dependencies from your project.)</p>
 <h3 id="setup">Setup</h3>
 <ul>
-<li>Initialize with <code>uvx cruft create https://github.com/Carlovo/straight_to_the_money</code> and fill in your project details.</li>
+<li>Initialize with <code>uvx cruft create --checkout v0.1.0 https://github.com/Carlovo/straight_to_the_money</code> and fill in your project details.</li>
 <li>Validate the setup with <code>uv run python -c "import straight_to_the_money; print(straight_to_the_money.hello())"</code> (replace <code>straight_to_the_money</code> with your project name/slug).</li>
-<li>Optionally, pull in any dependencies with <code>uv add some_lib_you_need</code></li>
+<li>Either, run <code>uv lock</code> to generate a .lock file, or run <code>uv add some_lib_you_need</code> if your project has dependencies.</li>
 </ul>
 <h3 id="workflow">Workflow</h3>
 <ul>
@@ -241,5 +241,5 @@ Or, have a look at <a href="https://github.com/Carlovo/straight_to_the_kitchen_s
 
 <!--
 MkDocs version : 1.6.1
-Build Date UTC : 2024-12-04 20:51:51.017163+00:00
+Build Date UTC : 2024-12-05 13:51:14.179374+00:00
 -->
