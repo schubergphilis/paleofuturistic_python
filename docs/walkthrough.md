@@ -14,7 +14,7 @@ Except for the template, of course.
 Because we just cloned an empty repository, we can assume to be safe though.
 Clone your new repository somewhere.
 From the directory directly above it run:
-`uvx cruft create -f https://github.com/Carlovo/straight_to_the_money`
+`uvx cruft create -f --checkout v0.1.0 https://github.com/Carlovo/straight_to_the_money`
 (mind the `-f`).
 cd to your project directory; git add all, commit and push; and you are ready to go.
 

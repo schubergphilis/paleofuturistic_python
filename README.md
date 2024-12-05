@@ -18,10 +18,9 @@ Also look at their docs for the parts of dependency management not covered in th
 
 ### Setup
 
-- Initialize with `uvx cruft create https://github.com/Carlovo/straight_to_the_money` and fill in your project details.
+- Initialize with `uvx cruft create --checkout v0.1.0 https://github.com/Carlovo/straight_to_the_money` and fill in your project details.
 - Validate the setup with `uv run python -c "import straight_to_the_money; print(straight_to_the_money.hello())"` (replace `straight_to_the_money` with your project name/slug).
-- Run `uv lock` to init the lock file.
-Or pull in any dependencies with `uv add some_lib_you_need` and also initiate the uv.lock file.
+- Either, run `uv lock` to generate a .lock file, or run `uv add some_lib_you_need` if your project has dependencies.
 
 ### Workflow
 
