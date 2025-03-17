@@ -18,8 +18,8 @@ Also look at their docs for the parts of dependency management not covered in th
 
 ### Setup
 
-- Initialize with `uvx cruft create --checkout v0.1.0 https://github.com/Carlovo/straight_to_the_money` and fill in your project details.
-- Validate the setup with `uv run python -c "import straight_to_the_money; print(straight_to_the_money.hello())"` (replace `straight_to_the_money` with your project name/slug).
+- Initialize with `uvx cruft create --checkout latest https://github.com/carlovoSBP/crave_all_the_money` and fill in your project details.
+- Optional: validate the setup with `uv run python -c "import crave_all_the_money; print(crave_all_the_money.hello())"` (replace `crave_all_the_money` with your project name/slug).
 - Either, run `uv lock` to generate a .lock file, or run `uv add some_lib_you_need` if your project has dependencies.
 
 ### Workflow
@@ -32,8 +32,8 @@ Also look at their docs for the parts of dependency management not covered in th
 
 Can it really be that simple?
 Well, eventually yes, but you will need to set up some connections and credentials still, of course.
-For a slightly more elaborate walkthrough on that, see the [docs](https://carlovo.github.io/straight_to_the_money/walkthrough/).
+For a slightly more elaborate walkthrough on that, see the [docs](https://carlovosbp.github.io/crave_all_the_money/walkthrough/).
 
 Still skeptical?
-See the [about](https://carlovo.github.io/straight_to_the_money/about/) instead.
-Or, have a look at [my kitchen sink project](https://github.com/Carlovo/straight_to_the_kitchen_sink) created with this template.
+See the [about](https://carlovosbp.github.io/crave_all_the_money/about/) instead.
+Or, have a look at [my kitchen sink project](https://github.com/carlovoSBP/kitchen_sink_full_of_cravings) created with this template.
