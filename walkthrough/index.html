@@ -8,7 +8,7 @@
         <meta name="author" content="Carlo 'carlovo' van Overbeek">
         
         <link rel="shortcut icon" href="../img/favicon.ico">
-        <title>Walkthrough - Crave all the Money 🤑</title>
+        <title>Walkthrough - Paleofuturistic Python</title>
         <link href="../css/bootstrap.min.css" rel="stylesheet">
         <link href="../css/fontawesome.min.css" rel="stylesheet">
         <link href="../css/brands.min.css" rel="stylesheet">
@@ -24,7 +24,7 @@
     <body>
         <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
             <div class="container">
-                <a class="navbar-brand" href="..">Crave all the Money 🤑</a>
+                <a class="navbar-brand" href="..">Paleofuturistic Python</a>
                 <!-- Expander button -->
                 <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -62,7 +62,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="https://github.com/carlovoSBP/crave_all_the_money/blob/main/docs/walkthrough.md" class="nav-link"><i class="fa-brands fa-github"></i> Edit on GitHub</a>
+                                <a href="https://github.com/schubergphilis/paleofuturistic_python/blob/main/docs/walkthrough.md" class="nav-link"><i class="fa-brands fa-github"></i> Edit on GitHub</a>
                             </li>
                             <li class="nav-item dropdown">
                               <button id="theme-menu" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static" aria-label="Toggle theme" class="nav-link dropdown-toggle">
@@ -153,7 +153,7 @@ Except for the template, of course.</p>
 Because we just cloned an empty repository, we can assume to be safe though.
 Clone your new repository somewhere.
 From the directory directly above it run:
-<code>uvx cruft create -f --checkout v0.1.0 https://github.com/Carlovo/straight_to_the_money</code>
+<code>uvx cruft create -f --checkout latest https://github.com/schubergphilis/paleofuturistic_python</code>
 (mind the <code>-f</code>).
 cd to your project directory; git add all, commit and push; and you are ready to go.</p>
 <p>Other options would be:</p>
@@ -185,8 +185,8 @@ Then you can upload your work with:<br />
 <code>uv publish --publish-url https://test.pypi.org/legacy/ -t pypi-XXX</code>
 (replace <code>XXX</code> with your specific credentials).</p>
 <p>You can test whether everything went OK by running:<br />
-<code>uv run --with "https://test-files.pythonhosted.org/packages/XXX/XXX/XXX/straight_to_the_money-0.1.0-py3-none-any.whl" --no-project -- python -c "import straight_to_the_money; print(straight_to_the_money.hello())"</code>
-(replace <code>XXX</code> with your ids and <code>straight_to_the_money</code> to your project's name).</p>
+<code>uv run --with "https://test-files.pythonhosted.org/packages/XXX/XXX/XXX/paleofuturistic_python-0.1.0-py3-none-any.whl" --no-project -- python -c "import paleofuturistic_python; print(paleofuturistic_python.hello())"</code>
+(replace <code>XXX</code> with your ids and <code>paleofuturistic_python</code> to your project's name).</p>
 <p>If that works or if you just want to skip to the real deal,
 then make an account at <a href="https://pypi.org/">PyPI</a> and
 <a href="https://docs.astral.sh/uv/guides/publish/#publishing-your-package">configure uv</a> to publish to it the proper way.</p>
@@ -207,7 +207,7 @@ Considering the publishing and all, you may want to alter the workflow in this p
 <li>Build: <code>uv build</code></li>
 <li>Preview documentation: <code>uvx mkdocs serve</code></li>
 <li>Publish package: <code>uv publish</code></li>
-<li>Test package upload: <code>uv run --with "https://test-files.pythonhosted.org/packages/XXX/XXX/XXX/straight_to_the_money-0.1.0-py3-none-any.whl" --no-project -- python -c "import straight_to_the_money;"</code></li>
+<li>Test package upload: <code>uv run --with "https://test-files.pythonhosted.org/packages/XXX/XXX/XXX/paleofuturistic_python-0.1.0-py3-none-any.whl" --no-project -- python -c "import paleofuturistic_python;"</code></li>
 <li>Publish documentation: <code>uvx mkdocs gh-deploy</code></li>
 </ul>
 <p>Or even better, create your own workflow that exactly caters to your project's needs.</p>
