@@ -1,8 +1,8 @@
-site_name: Crave all the Money 🤑
+site_name: Paleofuturistic Python
 site_author: Carlo 'carlovo' van Overbeek
-site_description: Open source Python project template with enterprise-level teamwork in mind
+site_description: The Python development workflow your past self had always hoped for is finally here!
 
-repo_url: https://github.com/carlovoSBP/crave_all_the_money
+repo_url: https://github.com/schubergphilis/paleofuturistic_python
 edit_uri: blob/main/docs/
 
 theme:

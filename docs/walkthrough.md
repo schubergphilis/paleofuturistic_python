@@ -14,7 +14,7 @@ Except for the template, of course.
 Because we just cloned an empty repository, we can assume to be safe though.
 Clone your new repository somewhere.
 From the directory directly above it run:
-`uvx cruft create -f --checkout v0.1.0 https://github.com/Carlovo/straight_to_the_money`
+`uvx cruft create -f --checkout latest https://github.com/schubergphilis/paleofuturistic_python`
 (mind the `-f`).
 cd to your project directory; git add all, commit and push; and you are ready to go.
 
@@ -55,8 +55,8 @@ Then you can upload your work with:
 (replace `XXX` with your specific credentials).
 
 You can test whether everything went OK by running:  
-`uv run --with "https://test-files.pythonhosted.org/packages/XXX/XXX/XXX/straight_to_the_money-0.1.0-py3-none-any.whl" --no-project -- python -c "import straight_to_the_money; print(straight_to_the_money.hello())"`
-(replace `XXX` with your ids and `straight_to_the_money` to your project's name).
+`uv run --with "https://test-files.pythonhosted.org/packages/XXX/XXX/XXX/paleofuturistic_python-0.1.0-py3-none-any.whl" --no-project -- python -c "import paleofuturistic_python; print(paleofuturistic_python.hello())"`
+(replace `XXX` with your ids and `paleofuturistic_python` to your project's name).
 
 If that works or if you just want to skip to the real deal,
 then make an account at [PyPI](https://pypi.org/) and
@@ -83,7 +83,7 @@ Considering the publishing and all, you may want to alter the workflow in this p
 - Build: `uv build`
 - Preview documentation: `uvx mkdocs serve`
 - Publish package: `uv publish`
-- Test package upload: `uv run --with "https://test-files.pythonhosted.org/packages/XXX/XXX/XXX/straight_to_the_money-0.1.0-py3-none-any.whl" --no-project -- python -c "import straight_to_the_money;"`
+- Test package upload: `uv run --with "https://test-files.pythonhosted.org/packages/XXX/XXX/XXX/paleofuturistic_python-0.1.0-py3-none-any.whl" --no-project -- python -c "import paleofuturistic_python;"`
 - Publish documentation: `uvx mkdocs gh-deploy`
 
 Or even better, create your own workflow that exactly caters to your project's needs.

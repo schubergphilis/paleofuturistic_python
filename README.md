@@ -1,10 +1,10 @@
-# Crave all the Money 🤑
+# Paleofuturistic Python
 
-> _Open source Python project template with enterprise-level teamwork in mind_
+> _The Python development workflow your past self had always hoped for is finally here!_
 
-Don't settle for less than a Python project template that fulfils all your development needs 🤝  
-Don't settle for less than a Python project template that uses the best tools 🛠️  
-Crave all the money 🤑
+<p align="center">
+  <img src="./docs/paleofuturistic_python.png?raw=true" alt="Paleofuturistic Environment"/>
+</p>
 
 This is a detached fork of [Straight to the Money 💰](https://github.com/Carlovo/straight_to_the_money).
 Check it out if this template is a bit too involved for you and you want to go with something more simple.
@@ -18,8 +18,8 @@ Also look at their docs for the parts of dependency management not covered in th
 
 ### Setup
 
-- Initialize with `uvx cruft create --checkout latest https://github.com/carlovoSBP/crave_all_the_money` and fill in your project details.
-- Optional: validate the setup with `uv run python -c "import crave_all_the_money; print(crave_all_the_money.hello())"` (replace `crave_all_the_money` with your project name/slug).
+- Initialize with `uvx cruft create --checkout latest https://github.com/schubergphilis/paleofuturistic_python` and fill in your project details.
+- Optional: validate the setup with `uv run python -c "import paleofuturistic_python; print(paleofuturistic_python.hello())"` (replace `paleofuturistic_python` with your project name/slug).
 - Either, run `uv lock` to generate a .lock file, or run `uv add some_lib_you_need` if your project has dependencies.
 
 ### Workflow
@@ -32,8 +32,8 @@ Also look at their docs for the parts of dependency management not covered in th
 
 Can it really be that simple?
 Well, eventually yes, but you will need to set up some connections and credentials still, of course.
-For a slightly more elaborate walkthrough on that, see the [docs](https://carlovosbp.github.io/crave_all_the_money/walkthrough/).
+For a slightly more elaborate walkthrough on that, see the [docs](https://schubergphilis.github.io/paleofuturistic_python/walkthrough/).
 
 Still skeptical?
-See the [about](https://carlovosbp.github.io/crave_all_the_money/about/) instead.
+See the [about](https://schubergphilis.github.io/paleofuturistic_python/about/) instead.
 Or, have a look at [my kitchen sink project](https://github.com/carlovoSBP/kitchen_sink_full_of_cravings) created with this template.

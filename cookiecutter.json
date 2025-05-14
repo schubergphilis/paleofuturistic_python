@@ -1,8 +1,8 @@
 {
-  "project_name": "Straight to the Money",
+  "project_name": "Paleofuturistic Python Project",
   "project_slug": "{{ cookiecutter.project_name.lower().replace(' ', '_') }}",
-  "project_description": "Let's make some money!",
-  "full_name": "The caveman who invented money",
-  "email": "man@money.cave",
+  "project_description": "Development flow as Paleofuturistic Python",
+  "full_name": "Paleofuturistic Python",
+  "email": "me@here.now",
   "python_version": "3.12"
 }
