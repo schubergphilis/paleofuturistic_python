@@ -13,18 +13,18 @@ Check it out if this template is a bit too involved for you and you want to go w
 
 Prerequisite: [uv](https://docs.astral.sh/uv/)  
 (Installing uv should also provide you with uvx.
-Give their docs a look-over before continuing if you want to get a better understanding of what is going on under the hood in the steps below.
-Also look at their docs for the parts of dependency management not covered in this template's standard flow, such as removing dependencies from your project.)
+Give their docs a look-over before continuing if you want to get a better understanding of what is going on under the hood in the steps below.)
 
 ### Setup
 
 - Initialize with `uvx cruft create --checkout latest https://github.com/schubergphilis/paleofuturistic_python` and fill in your project details.
-- Validate the setup with `uv run python -c "import paleofuturistic_python; print(paleofuturistic_python.hello())"` (replace `paleofuturistic_python` with your project name/slug).
+- Optional: validate the setup with `uv run python -c "import paleofuturistic_python; print(paleofuturistic_python.hello())"` (replace `paleofuturistic_python` with your project name/slug).
 - Either, run `uv lock` to generate a .lock file, or run `uv add some_lib_you_need` if your project has dependencies.
 
 ### Workflow
 
 - Format: `uvx ruff format`
+- Lint: `uvx ruff check`
 - Test: `uv run python -m unittest`
 - Build: `uv build`
 - Document: `uvx mkdocs build`
@@ -32,8 +32,8 @@ Also look at their docs for the parts of dependency management not covered in th
 
 Can it really be that simple?
 Well, eventually yes, but you will need to set up some connections and credentials still, of course.
-For a slightly more elaborate walkthrough on that, see the [docs](walkthrough.md).
+For a slightly more elaborate walkthrough on that, see the [docs](https://schubergphilis.github.io/paleofuturistic_python/walkthrough/).
 
 Still skeptical?
-See the [about](about.md) instead.
-Or, have a look at [my kitchen sink project](https://github.com/carlovoSBP/kitchen_sink_full_of_cravings) created with this template.
+See the [about](https://schubergphilis.github.io/paleofuturistic_python/about/) instead.
+Or, have a look at [a kitchen sink project](https://github.com/carlovoSBP/kitchen_sink_full_of_cravings) created with this template.

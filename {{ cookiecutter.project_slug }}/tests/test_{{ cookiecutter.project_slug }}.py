@@ -1,4 +1,5 @@
 from unittest import TestCase
+
 from {{ cookiecutter.project_slug }} import hello
 
 
