@@ -23,9 +23,13 @@ Give their docs a look-over before continuing if you want to get a better unders
 
 ### Workflow
 
-- Format: `uvx ruff format`
-- Lint: `uvx ruff check`
-- Test: `uv run python -m unittest`
+- Download dependencies (if you need any): `uv add some_lib_you_need`
+- Develop your feature.
+- QA:
+  - Format: `uvx ruff format`
+  - Lint: `uvx ruff check`
+  - Type check: `uv run mypy`
+  - Test: `uv run python -m unittest`
 - Build: `uv build`
 - Document: `uvx mkdocs build`
 - Publish: `uv publish`

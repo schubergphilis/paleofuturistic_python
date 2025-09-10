@@ -37,16 +37,13 @@ Yes, that includes caching and project-based isolation.
 For starters just adding some dependencies from PyPI is probably all you want.
 All the other things you would want from (uv's) dependency management you can always look into later.
 
-## Quality assurance (formatting, linting and testing)
+## Quality assurance (formatting, linting, type checking and testing)
 
-Staying in line with the minimalistic theme, I kept the configuration of the tools that I advice for doing QA minimal.
-I tinkered only a bit with the linting (`uvx ruff check`), mainly because I love isort.
-You can see the config in the `pyproject.toml`.
+You can see the config for these steps in the `pyproject.toml`.
+Formatting (`uvx ruff format`), type checking (`uv run mypy`) and testing (`uv run python -m unittest`) should speak for themselves.
+The ruff formatter, mypy and Python's build-in testing library are ubiquitous and easy to use.
 
-Formatting (`uvx ruff format`) and testing (`uv run python -m unittest`) should speak for themselves.
-The ruff formatter and Python's build-in testing library are ubiquitous and easy to use.
-
-You can get into the weeds very fast with linting though.
+You can get into the weeds very fast with linting (`uvx ruff check`) though.
 If you go with the flow of this template it's probably going to work out fine for your first 1,000 commits or so.
 And by that time you can probably figure out how to stop a pesky linter from undoing your intricacies,
 so my advice would be to not give it too much thought.
@@ -110,9 +107,11 @@ Considering the publishing and all, you may want to alter the workflow in this p
 
 - Download dependencies (if you need any): `uv add some_lib_you_need`
 - Develop your feature
-- Format: `uvx ruff format`
-- Lint: `uvx ruff check` (or simply `uvx ruff check --fix` if, you also, like to live dangerously)
-- Test: `uv run python -m unittest`
+- QA:
+  - Format: `uvx ruff format`
+  - Lint: `uvx ruff check` (or simply `uvx ruff check --fix` if, you also, like to live dangerously)
+  - Type check: `uv run mypy`
+  - Test: `uv run python -m unittest`
 - Build: `uv build`
 - Preview documentation: `uvx mkdocs serve`
 - Publish package: `uv publish`

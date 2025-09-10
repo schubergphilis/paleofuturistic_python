@@ -9,11 +9,16 @@ authors = [
 requires-python = ">={{ cookiecutter.python_version }}"
 dependencies = []
 classifiers = [
-  # License
-  "License :: OSI Approved :: Apache Software License",
+    # License
+    "License :: OSI Approved :: Apache Software License",
 
-  # Python versions supported by the package
-  "Programming Language :: Python :: {{ cookiecutter.python_version }}",
+    # Python versions supported by the package
+    "Programming Language :: Python :: {{ cookiecutter.python_version }}",
+]
+
+[dependency-groups]
+dev = [
+    "mypy>=1.17.1",
 ]
 
 [build-system]
@@ -22,25 +27,31 @@ build-backend = "uv_build"
 
 [tool.ruff.lint]
 select = [
-  # pycodestyle
-  "E",
-  # Pyflakes
-  "F",
-  # pyupgrade
-  "UP",
-  # flake8-bugbear
-  "B",
-  # flake8-simplify
-  "SIM",
-  # isort
-  "I",
+    # pycodestyle
+    "E",
+    # Pyflakes
+    "F",
+    # pyupgrade
+    "UP",
+    # flake8-bugbear
+    "B",
+    # flake8-simplify
+    "SIM",
+    # isort
+    "I",
 ]
 # Recommended ignore list for preventing clashes between ruff lint and ruff format.
 ignore = [
-  # indentation-with-invalid-multiple
-  "E111",
-  #indentation-with-invalid-multiple-comment
-  "E114",
-  # over-indented
-  "E117",
+    # indentation-with-invalid-multiple
+    "E111",
+    #indentation-with-invalid-multiple-comment
+    "E114",
+    # over-indented
+    "E117",
 ]
+
+[tool.mypy]
+files = [
+    "src"
+]
+disallow_untyped_defs = true

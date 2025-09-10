@@ -22,10 +22,10 @@ Prerequisite: [uv](https://docs.astral.sh/uv/)
 
 - Download dependencies (if you need any): `uv add some_lib_you_need`
 - Develop your feature.
-- Format: `uvx ruff format`
 - QA:
   - Format: `uvx ruff format`
   - Lint: `uvx ruff check`
+  - Type check: `uv run mypy`
   - Test: `uv run python -m unittest`
 - Build (to validate it works): `uv build`
 - Review documentation updates: `uvx mkdocs serve`
