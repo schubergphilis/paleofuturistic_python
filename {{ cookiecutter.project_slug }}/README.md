@@ -21,12 +21,12 @@ Prerequisite: [uv](https://docs.astral.sh/uv/)
 ### Workflow
 
 - Download dependencies (if you need any): `uv add some_lib_you_need`
-- Develop your feature.
+- Develop (optional, tinker: `uvx --with . ptpython`)
 - QA:
-  - Format: `uvx ruff format`
-  - Lint: `uvx ruff check`
-  - Type check: `uv run mypy`
-  - Test: `uv run python -m unittest`
+    - Format: `uvx ruff format`
+    - Lint: `uvx ruff check`
+    - Type check: `uvx mypy`
+    - Test: `uv run python -m unittest`
 - Build (to validate it works): `uv build`
 - Review documentation updates: `uvx mkdocs serve`
 - Make a pull request.

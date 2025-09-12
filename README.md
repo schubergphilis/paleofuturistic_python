@@ -24,12 +24,12 @@ Give their docs a look-over before continuing if you want to get a better unders
 ### Workflow
 
 - Download dependencies (if you need any): `uv add some_lib_you_need`
-- Develop your feature.
+- Develop (optional, tinker: `uvx --with . ptpython`)
 - QA:
-  - Format: `uvx ruff format`
-  - Lint: `uvx ruff check`
-  - Type check: `uv run mypy`
-  - Test: `uv run python -m unittest`
+    - Format: `uvx ruff format`
+    - Lint: `uvx ruff check`
+    - Type check: `uvx mypy`
+    - Test: `uv run python -m unittest`
 - Build: `uv build`
 - Document: `uvx mkdocs build`
 - Publish: `uv publish`

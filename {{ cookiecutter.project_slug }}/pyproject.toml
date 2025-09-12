@@ -16,11 +16,6 @@ classifiers = [
     "Programming Language :: Python :: {{ cookiecutter.python_version }}",
 ]
 
-[dependency-groups]
-dev = [
-    "mypy>=1.17.1",
-]
-
 [build-system]
 requires = ["uv_build>=0.8.15,<0.9.0"]
 build-backend = "uv_build"
@@ -44,14 +39,12 @@ select = [
 ignore = [
     # indentation-with-invalid-multiple
     "E111",
-    #indentation-with-invalid-multiple-comment
+    # indentation-with-invalid-multiple-comment
     "E114",
     # over-indented
     "E117",
 ]
 
 [tool.mypy]
-files = [
-    "src"
-]
+files = ["src/"]
 disallow_untyped_defs = true
