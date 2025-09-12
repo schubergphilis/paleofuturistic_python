@@ -31,7 +31,7 @@ Give their docs a look-over before continuing if you want to get a better unders
     - Type check: `uvx mypy`
     - Test: `uv run python -m unittest`
 - Build: `uv build`
-- Document: `uvx mkdocs build`
+- Document: `uvx --with mkdocstrings[python] mkdocs build`
 - Publish: `uv publish`
 
 Can it really be that simple?

@@ -8,4 +8,4 @@ class TestSmoke(TestCase):
         self.assertTrue(True)
 
     def test_integration(self):
-        self.assertEqual("Hello from {{ cookiecutter.project_slug }}!", hello())
+        self.assertEqual("Hello you from {{ cookiecutter.project_slug }}!", hello())

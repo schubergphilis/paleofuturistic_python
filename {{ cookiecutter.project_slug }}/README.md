@@ -10,6 +10,8 @@ Preferred: `uv add {{ cookiecutter.project_slug }}`
 
 ## Developing further
 
+> Development flow as [Paleofuturistic Python](https://github.com/schubergphilis/paleofuturistic_python)
+
 Prerequisite: [uv](https://docs.astral.sh/uv/)
 
 ### Setup
@@ -28,5 +30,5 @@ Prerequisite: [uv](https://docs.astral.sh/uv/)
     - Type check: `uvx mypy`
     - Test: `uv run python -m unittest`
 - Build (to validate it works): `uv build`
-- Review documentation updates: `uvx mkdocs serve`
+- Review documentation updates: `uvx --with mkdocstrings[python] mkdocs serve`
 - Make a pull request.

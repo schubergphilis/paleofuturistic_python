@@ -59,13 +59,17 @@ Other than that, this step should simply be a `uv build` command that just works
 
 ## Previewing and publishing your documentation
 
-So `uvx mkdocs build` nicely converts your documentation to a static website, now what?
-You will probably want to preview it before committing the source files, and when committed you will probably want to publish the build files somewhere on the web.
+So `uvx --with mkdocstrings[python] mkdocs build` nicely converts your documentation to a static website...
+Now what and what is that magic `--with` statement?
+First the `--with`, it injects additional dependencies into the environment for mkdocs, in this case mkdocstrings with its python add-on.
+Run the command and check you project's documentation to see the fancy feature descriptions mkdocstrings can make for you from a docstring.
+(I found mkdocstrings works best with numpy style docs, so that's the template's default; you can change that in the `mkdocs.yaml`.)
 
+Wait, how do I check my documentation and how do I publish it?
 MkDocs has two convenient commands build in for that:
 
-- `uvx mkdocs serve` will serve a preview on local host `http://127.0.0.1:8000/` (with watch files!).
-- `uvx mkdocs gh-deploy` will upload your documentation to GitHub Pages.
+- `uvx --with mkdocstrings[python] mkdocs serve` will serve a preview on local host `http://127.0.0.1:8000/` (with watch files!).
+- `uvx --with mkdocstrings[python] mkdocs gh-deploy` will upload your documentation to GitHub Pages.
 
 Both these commands have a lot of options and MkDocs has a lot more to offer in general (including automated publishing to other hosting parties).
 [See for yourself.](https://www.mkdocs.org/)
@@ -109,7 +113,7 @@ Considering the publishing and all, you may want to alter the workflow in this p
     - Type check: `uvx mypy`
     - Test: `uv run python -m unittest`
 - Build: `uv build`
-- Preview documentation: `uvx mkdocs serve`
+- Preview documentation: `uvx --with mkdocstrings[python] mkdocs serve`
 - Publish package: `uv publish`
 - Publish documentation: `uvx mkdocs gh-deploy`
 
