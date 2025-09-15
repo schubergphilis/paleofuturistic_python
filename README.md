@@ -24,7 +24,7 @@ Give their docs a look-over before continuing if you want to get a better unders
 ### Workflow
 
 - Download dependencies (if you need any): `uv add some_lib_you_need`
-- Develop (optional, tinker: `uvx --with . ptpython`)
+- Develop (optional, tinker: `uvx --refresh --with . ptpython`)
 - QA:
     - Format: `uvx ruff format`
     - Lint: `uvx ruff check`

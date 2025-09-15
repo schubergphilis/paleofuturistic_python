@@ -97,7 +97,8 @@ then make an account at [PyPI](https://pypi.org/) and
 
 You could simply run `uv run python` and tinker away in your virtual env, but quality of life in ptpython's REPL is simply much better.
 Directly running `uvx ptpython` doesn't work here, because uv's whole point is env separation.
-To give your current project's context to ptpython you can run `uvx --with . ptpython`.
+To give your current project's context to ptpython you can run `uvx --refresh --with . ptpython`.
+The `--refresh` is added to flush uv's cache so your most recent edits are also usable in ptpython.
 
 ## The updated happy path workflow
 
@@ -106,7 +107,7 @@ The real reward is of course a reliable way of developing your Python project.
 Considering the publishing and all, you may want to alter the workflow in this project's introduction to something like:
 
 - Download dependencies (if you need any): `uv add some_lib_you_need`
-- Develop (optional, tinker: `uvx --with . ptpython`)
+- Develop (optional, tinker: `uvx --refresh --with . ptpython`)
 - QA:
     - Format: `uvx ruff format`
     - Lint: `uvx ruff check` (or simply `uvx ruff check --fix` if, you also, like to live dangerously)
