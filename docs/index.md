@@ -36,8 +36,8 @@ Give their docs a look-over before continuing if you want to get a better unders
 
 Can it really be that simple?
 Well, eventually yes, but you will need to set up some connections and credentials still, of course.
-For a slightly more elaborate walkthrough on that, see the [docs](https://schubergphilis.github.io/paleofuturistic_python/walkthrough/).
+For a slightly more elaborate walkthrough on that, see the [docs](walkthrough.md).
 
 Still skeptical?
-See the [about](https://schubergphilis.github.io/paleofuturistic_python/about/) instead.
+See the [about](about.md) instead.
 Or, have a look at [a kitchen sink project](https://github.com/carlovoSBP/kitchen_sink_full_of_cravings) created with this template.

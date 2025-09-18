@@ -4,4 +4,4 @@
 
 ## Public Functions
 
-::: {{ cookiecutter.project_name }}.hello
+::: {{ cookiecutter.project_slug }}.hello

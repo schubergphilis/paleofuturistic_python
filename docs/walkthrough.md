@@ -116,7 +116,7 @@ Considering the publishing and all, you may want to alter the workflow in this p
 - Build: `uv build`
 - Preview documentation: `uvx --with mkdocstrings[python] mkdocs serve`
 - Publish package: `uv publish`
-- Publish documentation: `uvx mkdocs gh-deploy`
+- Publish documentation: `uvx --with mkdocstrings[python] mkdocs gh-deploy`
 
 Or even better, create your own workflow that exactly caters to your project's needs.
 
