@@ -32,18 +32,24 @@ Maybe take a second look at the .gitignore, maybe not, it's fine...
 
 Usually a lot or even more of the low-level functionality you need for what you want to develop is already available.
 Luckily, reeling that good stuff in is one of uv's strengths.
-For example `uv add requests` does everything you would hope it to do by default.
+To download all dependencies to get started properly run `uv sync --all-extras --dev`.
+The `--all-extras --dev` flags trigger downloading optional and development dependencies respectively.
+After that you can add dependencies like `uv add requests`.
+
+These commands do everything you would hope they to do by default.
 Yes, that includes caching and project-based isolation.
 For starters just adding some dependencies from PyPI is probably all you want.
 All the other things you would want from (uv's) dependency management you can always look into later.
 
+By now you might have already guessed that uv acts on dependencies in your environment and uvx is meant for tools that live outside of it.
+
 ## Quality assurance (formatting, linting, type checking and testing)
 
 You can see the config for these steps in the `pyproject.toml`.
-Formatting (`uvx ruff format`), type checking (`uvx mypy`) and testing (`uv run python -m unittest`) should speak for themselves.
+Formatting (`uv run ruff format`), type checking (`uv run mypy`) and testing (`uv run python -m unittest`) should speak for themselves.
 The ruff formatter, mypy and Python's build-in testing library are ubiquitous and easy to use.
 
-You can get into the weeds very fast with linting (`uvx ruff check`) though.
+You can get into the weeds very fast with linting (`uv run ruff check`) though.
 If you go with the flow of this template it's probably going to work out fine for your first 1,000 commits or so.
 And by that time you can probably figure out how to stop a pesky linter from undoing your intricacies,
 so my advice would be to not give it too much thought.
@@ -109,9 +115,9 @@ Considering the publishing and all, you may want to alter the workflow in this p
 - Download dependencies (if you need any): `uv add some_lib_you_need`
 - Develop (optional, tinker: `uvx --refresh --with . ptpython`)
 - QA:
-    - Format: `uvx ruff format`
-    - Lint: `uvx ruff check` (or simply `uvx ruff check --fix` if, you also, like to live dangerously)
-    - Type check: `uvx mypy`
+    - Format: `uv run ruff format`
+    - Lint: `uv run ruff check` (or simply `uv run ruff check --fix` if, you also, like to live dangerously)
+    - Type check: `uv run mypy`
     - Test: `uv run python -m unittest`
 - Build: `uv build`
 - Preview documentation: `uvx --with mkdocstrings[python] mkdocs serve`
