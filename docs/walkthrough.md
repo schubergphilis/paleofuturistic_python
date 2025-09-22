@@ -85,19 +85,14 @@ Both these commands have a lot of options and MkDocs has a lot more to offer in 
 It's all done; time to make your work available to the masses!
 `uv publish` can be configured to go a lot of places, but let's just admit PyPI is the standard.
 
-For a first time, it might be a good idea to use the [PyPI Test instance](https://test.pypi.org/) though.
-Make an account there and get an api token.
-Then you can upload your work with:  
-`uv publish --publish-url https://test.pypi.org/legacy/ -t pypi-XXX`
-(replace `XXX` with your specific credentials).
+While you can make an account at [PyPI](https://pypi.org/),
+download a credential
+and [configure uv](https://docs.astral.sh/uv/guides/publish/#publishing-your-package) to publish that way,
+it might be a better a idea to replace the credentials with [configuring a trusted publisher](https://docs.pypi.org/trusted-publishers/adding-a-publisher/).
+If you follow trusted publisher guide you only have to change the owner and repository name from the example to make the release flow of this template work.
 
-You can test whether everything went OK by running:
-`uv run --with "https://test-files.pythonhosted.org/packages/XXX/XXX/XXX/paleofuturistic_python-0.1.0-py3-none-any.whl" --no-project -- python -c "import paleofuturistic_python; print(paleofuturistic_python.hello())"`
-(replace `XXX` with your ids and `paleofuturistic_python` to your project's name).
-
-If that works or if you just want to skip to the real deal,
-then make an account at [PyPI](https://pypi.org/) and
-[configure uv](https://docs.astral.sh/uv/guides/publish/#publishing-your-package) to publish to it the proper way.
+Afterwards run `uv run --isolated --no-project --with paleofuturistic_python python -c "import paleofuturistic_python; print(paleofuturistic_python.hello())"` to test whether everything went OK
+(replace `paleofuturistic_python` to your project's slug).
 
 ## Bonus: tinkering within context
 
