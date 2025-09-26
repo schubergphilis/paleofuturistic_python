@@ -13,8 +13,7 @@ Check it out if this template is a bit too involved for you and you want to go w
 
 Prerequisite: [uv](https://docs.astral.sh/uv/)  
 (Installing uv should also provide you with uvx.
-Give their docs a look-over before continuing if you want to get a better understanding of what is going on under the hood in the steps below.
-Also look at their docs for the parts of dependency management not covered in this template's standard flow, such as removing dependencies from your project.)
+Give their docs a look-over before continuing if you want to get a better understanding of what is going on under the hood in the steps below.)
 
 ### Setup
 
@@ -24,10 +23,15 @@ Also look at their docs for the parts of dependency management not covered in th
 
 ### Workflow
 
-- Format: `uvx ruff format`
-- Test: `uv run python -m unittest`
+- Download dependencies (if you need any): `uv add some_lib_you_need`
+- Develop (optional, tinker: `uvx --refresh --with . ptpython`)
+- QA:
+    - Format: `uvx ruff format`
+    - Lint: `uvx ruff check`
+    - Type check: `uvx mypy`
+    - Test: `uv run python -m unittest`
 - Build: `uv build`
-- Document: `uvx mkdocs build`
+- Document: `uvx --with mkdocstrings[python] mkdocs build`
 - Publish: `uv publish`
 
 Can it really be that simple?
@@ -36,4 +40,4 @@ For a slightly more elaborate walkthrough on that, see the [docs](https://schube
 
 Still skeptical?
 See the [about](https://schubergphilis.github.io/paleofuturistic_python/about/) instead.
-Or, have a look at [my kitchen sink project](https://github.com/carlovoSBP/kitchen_sink_full_of_cravings) created with this template.
+Or, have a look at [a kitchen sink project](https://github.com/carlovoSBP/kitchen_sink_full_of_cravings) created with this template.
