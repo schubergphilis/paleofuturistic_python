@@ -138,20 +138,26 @@ Check it out if this template is a bit too involved for you and you want to go w
 <h2 id="usage">Usage</h2>
 <p>Prerequisite: <a href="https://docs.astral.sh/uv/">uv</a><br />
 (Installing uv should also provide you with uvx.
-Give their docs a look-over before continuing if you want to get a better understanding of what is going on under the hood in the steps below.
-Also look at their docs for the parts of dependency management not covered in this template's standard flow, such as removing dependencies from your project.)</p>
+Give their docs a look-over before continuing if you want to get a better understanding of what is going on under the hood in the steps below.)</p>
 <h3 id="setup">Setup</h3>
 <ul>
 <li>Initialize with <code>uvx cruft create --checkout latest https://github.com/schubergphilis/paleofuturistic_python</code> and fill in your project details.</li>
-<li>Validate the setup with <code>uv run python -c "import paleofuturistic_python; print(paleofuturistic_python.hello())"</code> (replace <code>paleofuturistic_python</code> with your project name/slug).</li>
+<li>Optional: validate the setup with <code>uv run python -c "import paleofuturistic_python; print(paleofuturistic_python.hello())"</code> (replace <code>paleofuturistic_python</code> with your project name/slug).</li>
 <li>Either, run <code>uv lock</code> to generate a .lock file, or run <code>uv add some_lib_you_need</code> if your project has dependencies.</li>
 </ul>
 <h3 id="workflow">Workflow</h3>
 <ul>
+<li>Download dependencies (if you need any): <code>uv add some_lib_you_need</code></li>
+<li>Develop (optional, tinker: <code>uvx --refresh --with . ptpython</code>)</li>
+<li>QA:<ul>
 <li>Format: <code>uvx ruff format</code></li>
+<li>Lint: <code>uvx ruff check</code></li>
+<li>Type check: <code>uvx mypy</code></li>
 <li>Test: <code>uv run python -m unittest</code></li>
+</ul>
+</li>
 <li>Build: <code>uv build</code></li>
-<li>Document: <code>uvx mkdocs build</code></li>
+<li>Document: <code>uvx --with mkdocstrings[python] mkdocs build</code></li>
 <li>Publish: <code>uv publish</code></li>
 </ul>
 <p>Can it really be that simple?
@@ -159,7 +165,7 @@ Well, eventually yes, but you will need to set up some connections and credentia
 For a slightly more elaborate walkthrough on that, see the <a href="walkthrough/">docs</a>.</p>
 <p>Still skeptical?
 See the <a href="about/">about</a> instead.
-Or, have a look at <a href="https://github.com/carlovoSBP/kitchen_sink_full_of_cravings">my kitchen sink project</a> created with this template.</p></div>
+Or, have a look at <a href="https://github.com/carlovoSBP/kitchen_sink_full_of_cravings">a kitchen sink project</a> created with this template.</p></div>
             </div>
         </div>
 
@@ -242,5 +248,5 @@ Or, have a look at <a href="https://github.com/carlovoSBP/kitchen_sink_full_of_c
 
 <!--
 MkDocs version : 1.6.1
-Build Date UTC : 2025-05-15 07:46:19.479674+00:00
+Build Date UTC : 2025-09-26 10:21:22.534011+00:00
 -->

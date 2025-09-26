@@ -118,6 +118,18 @@
               <ul class="nav flex-column">
               </ul>
             </li>
+            <li class="nav-item" data-bs-level="2"><a href="#dependency-management" class="nav-link">Dependency management</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#quality-assurance-formatting-linting-type-checking-and-testing" class="nav-link">Quality assurance (formatting, linting, type checking and testing)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#building-your-package" class="nav-link">Building your package</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
             <li class="nav-item" data-bs-level="2"><a href="#previewing-and-publishing-your-documentation" class="nav-link">Previewing and publishing your documentation</a>
               <ul class="nav flex-column">
               </ul>
@@ -143,13 +155,13 @@
 
 <h1 id="walkthrough">Walkthrough</h1>
 <p>Some things in <a href="../#usage">usage</a> might require a little more effort on the first run.
-Let's go over those in more detail.</p>
+Let's go over those things and the rest in a little more detail.</p>
 <h2 id="initializing-your-project">Initializing your project</h2>
 <p>You will probably want to manage your project with some version control system and a remote, such as Git and GitHub.
 Personally, I like creating the repository in the remote and then cloning to local.
 That way everything is nicely set up for me.
 Except for the template, of course.</p>
-<p><a href="https://cruft.github.io/cruft/">cruft</a> (<a href="https://cookiecutter.readthedocs.io/en/stable/">cookiecutter</a> under its hood, actually) does not allow editing an existing directory by default for safety.
+<p><a href="https://cruft.github.io/cruft/">cruft</a> (<a href="https://cookiecutter.readthedocs.io/en/stable/">cookiecutter</a> under its hood) does not allow editing an existing directory by default for safety.
 Because we just cloned an empty repository, we can assume to be safe though.
 Clone your new repository somewhere.
 From the directory directly above it run:
@@ -162,53 +174,80 @@ cd to your project directory; git add all, commit and push; and you are ready to
 <li>create the project with directory from the template with cruft, copy the contents to a cloned repository; git add all, commit and push.</li>
 </ul>
 <h3 id="reviewing-gitignore-and-license">Reviewing .gitignore and LICENSE</h3>
-<p>Are they superfluous in a minimal project template?
-Maybe.
-I would simply always add these two directly if they weren't there already, so adding them felt like a time-saver if only for myself.
-If you had wanted another license than MIT, you have probably already chosen one and can easily override the templated one (if you do, do it in the <code>pyproject.toml</code> as well).
+<p>If you had wanted another license than Apache, you have probably already chosen one and can easily override the templated one (if you do, do it in the <code>pyproject.toml</code> as well).
 Maybe take a second look at the .gitignore, maybe not, it's fine...</p>
+<h2 id="dependency-management">Dependency management</h2>
+<p>Usually a lot or even more of the low-level functionality you need for what you want to develop is already available.
+Luckily, reeling that good stuff in is one of uv's strengths.
+For example <code>uv add requests</code> does everything you would hope it to do by default.
+Yes, that includes caching and project-based isolation.
+For starters just adding some dependencies from PyPI is probably all you want.
+All the other things you would want from (uv's) dependency management you can always look into later.</p>
+<h2 id="quality-assurance-formatting-linting-type-checking-and-testing">Quality assurance (formatting, linting, type checking and testing)</h2>
+<p>You can see the config for these steps in the <code>pyproject.toml</code>.
+Formatting (<code>uvx ruff format</code>), type checking (<code>uvx mypy</code>) and testing (<code>uv run python -m unittest</code>) should speak for themselves.
+The ruff formatter, mypy and Python's build-in testing library are ubiquitous and easy to use.</p>
+<p>You can get into the weeds very fast with linting (<code>uvx ruff check</code>) though.
+If you go with the flow of this template it's probably going to work out fine for your first 1,000 commits or so.
+And by that time you can probably figure out how to stop a pesky linter from undoing your intricacies,
+so my advice would be to not give it too much thought.
+(If you feel like getting into the weeds early though, <a href="https://docs.astral.sh/ruff/configuration/">have at you</a>.)</p>
+<h2 id="building-your-package">Building your package</h2>
+<p>uv has its own build backend nowadays.
+It works only for pure Python projects at the moment, but that's probably good enough for most projects.
+If you have more special needs you probably already know what you want and can configure that in the <code>pyproject.toml</code>.</p>
+<p>Other than that, this step should simply be a <code>uv build</code> command that just works.</p>
 <h2 id="previewing-and-publishing-your-documentation">Previewing and publishing your documentation</h2>
-<p>So <code>uvx mkdocs build</code> nicely converts your documentation to a static website, now what?
-You will probably want to preview it before committing the source files, and when committed you will probably want to publish the build files somewhere on the web.</p>
-<p>MkDocs has two convenient commands build in for that:</p>
+<p>So <code>uvx --with mkdocstrings[python] mkdocs build</code> nicely converts your documentation to a static website...
+Now what and what is that magic <code>--with</code> statement?
+First the <code>--with</code>, it injects additional dependencies into the environment for mkdocs, in this case mkdocstrings with its python add-on.
+Run the command and check you project's documentation to see the fancy feature descriptions mkdocstrings can make for you from a docstring.
+(I found mkdocstrings works best with numpy style docs, so that's the template's default; you can change that in the <code>mkdocs.yaml</code>.)</p>
+<p>Wait, how do I check my documentation and how do I publish it?
+MkDocs has two convenient commands build in for that:</p>
 <ul>
-<li><code>uvx mkdocs serve</code> will serve a preview on local host <code>http://127.0.0.1:8000/</code> (with watch files!).</li>
-<li><code>uvx mkdocs gh-deploy</code> will upload your documentation to GitHub Pages.</li>
+<li><code>uvx --with mkdocstrings[python] mkdocs serve</code> will serve a preview on local host <code>http://127.0.0.1:8000/</code> (with watch files!).</li>
+<li><code>uvx --with mkdocstrings[python] mkdocs gh-deploy</code> will upload your documentation to GitHub Pages.</li>
 </ul>
 <p>Both these commands have a lot of options and MkDocs has a lot more to offer in general (including automated publishing to other hosting parties).
 <a href="https://www.mkdocs.org/">See for yourself.</a></p>
 <h2 id="publishing-your-python-package">Publishing your Python package</h2>
-<p>It's all done; time to make your work available to the masses! <code>uv publish</code> can be configured to go a lot of places, but let's just admit PyPI is the standard.</p>
-<p>For a fist time, it might be a good idea to use the <a href="https://test.pypi.org/">PyPI Test instance</a> though.
+<p>It's all done; time to make your work available to the masses!
+<code>uv publish</code> can be configured to go a lot of places, but let's just admit PyPI is the standard.</p>
+<p>For a first time, it might be a good idea to use the <a href="https://test.pypi.org/">PyPI Test instance</a> though.
 Make an account there and get an api token.
 Then you can upload your work with:<br />
 <code>uv publish --publish-url https://test.pypi.org/legacy/ -t pypi-XXX</code>
 (replace <code>XXX</code> with your specific credentials).</p>
-<p>You can test whether everything went OK by running:<br />
+<p>You can test whether everything went OK by running:
 <code>uv run --with "https://test-files.pythonhosted.org/packages/XXX/XXX/XXX/paleofuturistic_python-0.1.0-py3-none-any.whl" --no-project -- python -c "import paleofuturistic_python; print(paleofuturistic_python.hello())"</code>
 (replace <code>XXX</code> with your ids and <code>paleofuturistic_python</code> to your project's name).</p>
 <p>If that works or if you just want to skip to the real deal,
 then make an account at <a href="https://pypi.org/">PyPI</a> and
 <a href="https://docs.astral.sh/uv/guides/publish/#publishing-your-package">configure uv</a> to publish to it the proper way.</p>
 <h2 id="bonus-tinkering-within-context">Bonus: tinkering within context</h2>
-<p>My advice: run <code>uv add --dev ptpython</code>, then run <code>uv run ptpython</code> to bathe in luxury, and accept that you just pulled in couple of not strictly necessary dependencies.
-You could simply run <code>uv run python</code> and tinker away in your virtual env, but quality of life in ptpython's REPL is simply much better.</p>
-<p>Sadly, <code>uvx ptpython</code> doesn't work here.
-It makes sense, of course, because uv's whole point is env separation.
-Still, it would have been great in this particular case.
-Maybe, hopefully, I can update this part someday with an elegant hack to make it possible.</p>
+<p>You could simply run <code>uv run python</code> and tinker away in your virtual env, but quality of life in ptpython's REPL is simply much better.
+Directly running <code>uvx ptpython</code> doesn't work here, because uv's whole point is env separation.
+To give your current project's context to ptpython you can run <code>uvx --refresh --with . ptpython</code>.
+The <code>--refresh</code> is added to flush uv's cache so your most recent edits are also usable in ptpython.</p>
 <h2 id="the-updated-happy-path-workflow">The updated happy path workflow</h2>
 <p>When you completed all the above successfully, pat yourself on the back for me.
 The real reward is of course a reliable way of developing your Python project.
 Considering the publishing and all, you may want to alter the workflow in this project's introduction to something like:</p>
 <ul>
+<li>Download dependencies (if you need any): <code>uv add some_lib_you_need</code></li>
+<li>Develop (optional, tinker: <code>uvx --refresh --with . ptpython</code>)</li>
+<li>QA:<ul>
 <li>Format: <code>uvx ruff format</code></li>
+<li>Lint: <code>uvx ruff check</code> (or simply <code>uvx ruff check --fix</code> if, you also, like to live dangerously)</li>
+<li>Type check: <code>uvx mypy</code></li>
 <li>Test: <code>uv run python -m unittest</code></li>
+</ul>
+</li>
 <li>Build: <code>uv build</code></li>
-<li>Preview documentation: <code>uvx mkdocs serve</code></li>
+<li>Preview documentation: <code>uvx --with mkdocstrings[python] mkdocs serve</code></li>
 <li>Publish package: <code>uv publish</code></li>
-<li>Test package upload: <code>uv run --with "https://test-files.pythonhosted.org/packages/XXX/XXX/XXX/paleofuturistic_python-0.1.0-py3-none-any.whl" --no-project -- python -c "import paleofuturistic_python;"</code></li>
-<li>Publish documentation: <code>uvx mkdocs gh-deploy</code></li>
+<li>Publish documentation: <code>uvx --with mkdocstrings[python] mkdocs gh-deploy</code></li>
 </ul>
 <p>Or even better, create your own workflow that exactly caters to your project's needs.</p>
 <p>Happy coding 🤗</p></div>
