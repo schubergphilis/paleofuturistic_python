@@ -43,6 +43,9 @@ All the other things you would want from (uv's) dependency management you can al
 
 By now you might have already guessed that uv acts on dependencies in your environment and uvx is meant for tools that live outside of it.
 
+Just a reminder: add the names of the public features you develop to the `__all__` list in `__init__.py`.
+This way others (that includes your unittest runs) can conveniently access them upon importing the module.
+
 ## Quality assurance (formatting, linting, type checking and testing)
 
 You can see the config for these steps in the `pyproject.toml`.
