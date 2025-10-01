@@ -97,6 +97,28 @@ If you follow trusted publisher guide you only have to change the owner and repo
 Afterwards run `uv run --isolated --no-project --with paleofuturistic_python python -c "import paleofuturistic_python; print(paleofuturistic_python.hello())"` to test whether everything went OK
 (replace `paleofuturistic_python` to your project's slug).
 
+### Security considerations
+
+Note you have just bestowed great power upon GitHub.
+With great power comes... No wait we have something serious to say here!
+
+If you followed the guides linked above you will have already setup a separate GitHub env for publishing and made use of PyPI's trusted publishing.
+That's great, but it's advisable to put up an even higher fence against attacks.
+
+You can for example use the following settings to protect your repository from outsiders:
+
+- Protect at least the `main` branch and `v*` tags with rulesets; configure them to enforce updates via peer-reviewed pull requests from forks.
+- Enable "Limit to users explicitly granted read or higher access" under "Code review limits".
+- Set "Require approval for all external contributors" under "Actions permissions" -> "Approval for running fork pull request workflows from contributors".
+- Set "Read repository contents and packages permissions" (no default repo write) under "Actions permissions" -> "Workflow permissions".
+- Uncheck "Allow GitHub Actions to create and approve pull requests" under "Actions permissions" -> "Workflow permissions".
+- You could even go as far as setting "Temporary interaction limits" under "Interaction limits".
+
+Protecting your repository from insider threats is far harder, but this might help:
+
+- Set some "Required reviewers" under "Environments" -> "Deployment protection rules".
+- Cumbersome to implement, but effective: org/repo admin access only for non-personal accounts which require 4-eyes approval for assuming.
+
 ## Bonus: tinkering within context
 
 You could simply run `uv run python` and tinker away in your virtual env, but quality of life in ptpython's REPL is simply much better.
@@ -117,9 +139,9 @@ Considering the publishing and all, you may want to alter the workflow in this p
     - Lint: `uv run ruff check` (or simply `uv run ruff check --fix` if, you also, like to live dangerously)
     - Type check: `uv run mypy`
     - Test: `uv run python -m unittest`
-- Build: `uv build`
+- Build: `uv build` (just to test it works)
 - Preview documentation: `uvx --with mkdocstrings[python] mkdocs serve`
-- Publish package: `uv publish`
+- Publish package: kickoff the Publish to PyPI workflow in GitHub Actions
 - Publish documentation: `uvx --with mkdocstrings[python] mkdocs gh-deploy`
 
 Or even better, create your own workflow that exactly caters to your project's needs.
