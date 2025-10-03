@@ -16,6 +16,12 @@ classifiers = [
     "Programming Language :: Python :: {{ cookiecutter.python_version }}",
 ]
 
+[dependency-groups]
+dev = [
+    "mypy==1.18.2",
+    "ruff==0.13.1",
+]
+
 [build-system]
 requires = ["uv_build>=0.8.15,<0.9.0"]
 build-backend = "uv_build"
