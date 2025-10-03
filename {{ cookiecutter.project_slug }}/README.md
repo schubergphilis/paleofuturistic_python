@@ -23,7 +23,7 @@ Prerequisite: [uv](https://docs.astral.sh/uv/)
 ### Workflow
 
 - Download dependencies (if you need any): `uv add some_lib_you_need`
-- Develop (optional, tinker: `uvx --refresh --with . ptpython`)
+- Develop (optional, tinker: `uvx --with-editable . ptpython`)
 - QA:
     - Format: `uv run ruff format`
     - Lint: `uv run ruff check`
