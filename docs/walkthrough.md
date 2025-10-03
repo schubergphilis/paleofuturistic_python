@@ -85,6 +85,9 @@ Both these commands have a lot of options and MkDocs has a lot more to offer in 
 
 ## Publishing your Python package
 
+> Before going forward, don't forget to version bump in the `pyproject.toml` and forward that to the lockfile with `uv lock`.  
+> Also, replace `paleofuturistic_python` to your project's slug in the examples below.
+
 It's all done; time to make your work available to the masses!
 `uv publish` can be configured to go a lot of places, but let's just admit PyPI is the standard.
 
@@ -92,10 +95,41 @@ While you can make an account at [PyPI](https://pypi.org/),
 download a credential
 and [configure uv](https://docs.astral.sh/uv/guides/publish/#publishing-your-package) to publish that way,
 it might be a better a idea to replace the credentials with [configuring a trusted publisher](https://docs.pypi.org/trusted-publishers/adding-a-publisher/).
-If you follow trusted publisher guide you only have to change the owner and repository name from the example to make the release flow of this template work.
+If you follow the trusted publisher guide you only have to change the owner and repository name from the example to make the release flow of this template work.
 
-Afterwards run `uv run --isolated --no-project --with paleofuturistic_python python -c "import paleofuturistic_python; print(paleofuturistic_python.hello())"` to test whether everything went OK
-(replace `paleofuturistic_python` to your project's slug).
+Afterwards run `uv run --isolated --no-project --with paleofuturistic_python python -c "import paleofuturistic_python; print(paleofuturistic_python.hello())"` to test whether everything went OK.
+
+### Executable apps
+
+Up until now we haven't specified yet whether the project is creating a package that will be a library or application.
+This workflow template was created for libraries, because those are usually the most involved to get going.
+Making the template able to produce Python apps is not much work luckily.
+(Making stand-alone apps is a whole other story though!
+In that case you may want to look at [PyInstaller](https://pyinstaller.org/) or [Nuitka](https://nuitka.net/) for example.)
+
+To make the package an executable module that supports something like `python -m paleofuturistic_python` (or `uv run --isolated --no-project --with paleofuturistic_python python -m paleofuturistic_python`) create a `__main__.py` that looks something like:
+
+``` Python
+from paleofuturistic_python import hello
+
+
+def main() -> None:
+    print(hello())
+
+
+if __name__ == "__main__":
+    main()
+```
+
+Then to make tools like uvx and pipx be able to execute the module like so `uvx --with paleofuturistic_python paleofuturistic_python` add the following to the `pyproject.toml`.
+
+``` toml
+[project.scripts]
+paleofuturistic_python = "paleofuturistic_python.__main__:main"
+```
+
+If you are setting out to build an app, you can implement all the boilerplate yourself with `os` and `argparse`.
+You could also look into available frameworks, for example for CLIs: [Typer](https://typer.tiangolo.com/).
 
 ### Security considerations
 
