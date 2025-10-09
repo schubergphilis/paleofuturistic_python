@@ -169,7 +169,7 @@ Considering the publishing and all, you may want to alter the workflow in this p
 - Download dependencies (if you need any): `uv add some_lib_you_need`
 - Develop (optional, tinker: `uvx --with-editable . ptpython`)
 - QA:
-    - Format: `uv run ruff format`
+    - Format: `uv run ruff format` (or `uv run ruff format --diff` if you want to check the proposed changes first)
     - Lint: `uv run ruff check` (or simply `uv run ruff check --fix` if, you also, like to live dangerously)
     - Type check: `uv run mypy`
     - Test: `uv run python -m unittest`
