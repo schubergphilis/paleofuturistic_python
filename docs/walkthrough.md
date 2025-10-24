@@ -32,18 +32,27 @@ Maybe take a second look at the .gitignore, maybe not, it's fine...
 
 Usually a lot or even more of the low-level functionality you need for what you want to develop is already available.
 Luckily, reeling that good stuff in is one of uv's strengths.
-For example `uv add requests` does everything you would hope it to do by default.
+To download all dependencies to get started properly run `uv sync --all-extras --dev`.
+The `--all-extras --dev` flags trigger downloading optional and development dependencies respectively.
+After that you can add dependencies like `uv add requests`.
+
+These commands do everything you would hope they to do by default.
 Yes, that includes caching and project-based isolation.
 For starters just adding some dependencies from PyPI is probably all you want.
 All the other things you would want from (uv's) dependency management you can always look into later.
 
+By now you might have already guessed that uv acts on dependencies in your environment and uvx is meant for tools that live outside of it.
+
+Just a reminder: add the names of the public features you develop to the `__all__` list in `__init__.py`.
+This way others (that includes your unittest runs) can conveniently access them upon importing the module.
+
 ## Quality assurance (formatting, linting, type checking and testing)
 
 You can see the config for these steps in the `pyproject.toml`.
-Formatting (`uvx ruff format`), type checking (`uvx mypy`) and testing (`uv run python -m unittest`) should speak for themselves.
+Formatting (`uv run ruff format`), type checking (`uv run mypy`) and testing (`uv run python -m unittest`) should speak for themselves.
 The ruff formatter, mypy and Python's build-in testing library are ubiquitous and easy to use.
 
-You can get into the weeds very fast with linting (`uvx ruff check`) though.
+You can get into the weeds very fast with linting (`uv run ruff check`) though.
 If you go with the flow of this template it's probably going to work out fine for your first 1,000 commits or so.
 And by that time you can probably figure out how to stop a pesky linter from undoing your intricacies,
 so my advice would be to not give it too much thought.
@@ -76,29 +85,80 @@ Both these commands have a lot of options and MkDocs has a lot more to offer in 
 
 ## Publishing your Python package
 
+> Before going forward, don't forget to version bump in the `pyproject.toml` and forward that to the lockfile with `uv lock`.  
+> Also, replace `paleofuturistic_python` to your project's slug in the examples below.
+
 It's all done; time to make your work available to the masses!
 `uv publish` can be configured to go a lot of places, but let's just admit PyPI is the standard.
 
-For a first time, it might be a good idea to use the [PyPI Test instance](https://test.pypi.org/) though.
-Make an account there and get an api token.
-Then you can upload your work with:  
-`uv publish --publish-url https://test.pypi.org/legacy/ -t pypi-XXX`
-(replace `XXX` with your specific credentials).
+While you can make an account at [PyPI](https://pypi.org/),
+download a credential
+and [configure uv](https://docs.astral.sh/uv/guides/publish/#publishing-your-package) to publish that way,
+it might be a better a idea to replace the credentials with [configuring a trusted publisher](https://docs.pypi.org/trusted-publishers/adding-a-publisher/).
+If you follow the trusted publisher guide you only have to change the owner and repository name from the example to make the release flow of this template work.
 
-You can test whether everything went OK by running:
-`uv run --with "https://test-files.pythonhosted.org/packages/XXX/XXX/XXX/paleofuturistic_python-0.1.0-py3-none-any.whl" --no-project -- python -c "import paleofuturistic_python; print(paleofuturistic_python.hello())"`
-(replace `XXX` with your ids and `paleofuturistic_python` to your project's name).
+Afterwards run `uv run --isolated --no-project --with paleofuturistic_python python -c "import paleofuturistic_python; print(paleofuturistic_python.hello())"` to test whether everything went OK.
 
-If that works or if you just want to skip to the real deal,
-then make an account at [PyPI](https://pypi.org/) and
-[configure uv](https://docs.astral.sh/uv/guides/publish/#publishing-your-package) to publish to it the proper way.
+### Executable apps
+
+Up until now we haven't specified yet whether the project is creating a package that will be a library or application.
+This workflow template was created for libraries, because those are usually the most involved to get going.
+Making the template able to produce Python apps is not much work luckily.
+(Making stand-alone apps is a whole other story though!
+In that case you may want to look at [PyInstaller](https://pyinstaller.org/) or [Nuitka](https://nuitka.net/) for example.)
+
+To make the package an executable module that supports something like `python -m paleofuturistic_python` (or `uv run --isolated --no-project --with paleofuturistic_python python -m paleofuturistic_python`) create a `__main__.py` that looks something like:
+
+``` Python
+from paleofuturistic_python import hello
+
+
+def main() -> None:
+    print(hello())
+
+
+if __name__ == "__main__":
+    main()
+```
+
+Then to make tools like uvx and pipx be able to execute the module like so `uvx --with paleofuturistic_python paleofuturistic_python` add the following to the `pyproject.toml`.
+
+``` toml
+[project.scripts]
+paleofuturistic_python = "paleofuturistic_python.__main__:main"
+```
+
+If you are setting out to build an app, you can implement all the boilerplate yourself with `os` and `argparse`.
+You could also look into available frameworks, for example for CLIs: [Typer](https://typer.tiangolo.com/).
+
+### Security considerations
+
+Note you have just bestowed great power upon GitHub.
+With great power comes... No wait we have something serious to say here!
+
+If you followed the guides linked above you will have already setup a separate GitHub env for publishing and made use of PyPI's trusted publishing.
+That's great, but it's advisable to put up an even higher fence against attacks.
+
+You can for example use the following settings to protect your repository from outsiders:
+
+- Protect at least the `main` branch and `v*` tags with rulesets; configure them to enforce updates via peer-reviewed pull requests from forks.
+- Enable "Limit to users explicitly granted read or higher access" under "Code review limits".
+- Set "Require approval for all external contributors" under "Actions permissions" -> "Approval for running fork pull request workflows from contributors".
+- Set "Read repository contents and packages permissions" (no default repo write) under "Actions permissions" -> "Workflow permissions".
+- Uncheck "Allow GitHub Actions to create and approve pull requests" under "Actions permissions" -> "Workflow permissions".
+- You could even go as far as setting "Temporary interaction limits" under "Interaction limits".
+
+Protecting your repository from insider threats is far harder, but this might help:
+
+- Set some "Required reviewers" under "Environments" -> "Deployment protection rules".
+- Cumbersome to implement, but effective: org/repo admin access only for non-personal accounts which require 4-eyes approval for assuming.
 
 ## Bonus: tinkering within context
 
 You could simply run `uv run python` and tinker away in your virtual env, but quality of life in ptpython's REPL is simply much better.
 Directly running `uvx ptpython` doesn't work here, because uv's whole point is env separation.
-To give your current project's context to ptpython you can run `uvx --refresh --with . ptpython`.
-The `--refresh` is added to flush uv's cache so your most recent edits are also usable in ptpython.
+To give your current project's context to ptpython you can run `uvx --with-editable . ptpython`.
+`--with-editable` is used instead of `--with` to make uv look at the latest local updates of your code.
 
 ## The updated happy path workflow
 
@@ -107,15 +167,15 @@ The real reward is of course a reliable way of developing your Python project.
 Considering the publishing and all, you may want to alter the workflow in this project's introduction to something like:
 
 - Download dependencies (if you need any): `uv add some_lib_you_need`
-- Develop (optional, tinker: `uvx --refresh --with . ptpython`)
+- Develop (optional, tinker: `uvx --with-editable . ptpython`)
 - QA:
-    - Format: `uvx ruff format`
-    - Lint: `uvx ruff check` (or simply `uvx ruff check --fix` if, you also, like to live dangerously)
-    - Type check: `uvx mypy`
+    - Format: `uv run ruff format` (or `uv run ruff format --diff` if you want to check the proposed changes first)
+    - Lint: `uv run ruff check` (or simply `uv run ruff check --fix` if, you also, like to live dangerously)
+    - Type check: `uv run mypy`
     - Test: `uv run python -m unittest`
-- Build: `uv build`
+- Build: `uv build` (just to test it works)
 - Preview documentation: `uvx --with mkdocstrings[python] mkdocs serve`
-- Publish package: `uv publish`
+- Publish package: kickoff the Publish to PyPI workflow in GitHub Actions
 - Publish documentation: `uvx --with mkdocstrings[python] mkdocs gh-deploy`
 
 Or even better, create your own workflow that exactly caters to your project's needs.

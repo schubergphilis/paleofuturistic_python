@@ -17,17 +17,17 @@ Prerequisite: [uv](https://docs.astral.sh/uv/)
 ### Setup
 
 - Clone this repository.
-- Download additional dependencies: `uv sync`
+- Download additional dependencies: `uv sync --all-extras --dev`
 - Optional: validate the setup with `uv run python -m unittest`
 
 ### Workflow
 
 - Download dependencies (if you need any): `uv add some_lib_you_need`
-- Develop (optional, tinker: `uvx --refresh --with . ptpython`)
+- Develop (optional, tinker: `uvx --with-editable . ptpython`)
 - QA:
-    - Format: `uvx ruff format`
-    - Lint: `uvx ruff check`
-    - Type check: `uvx mypy`
+    - Format: `uv run ruff format`
+    - Lint: `uv run ruff check`
+    - Type check: `uv run mypy`
     - Test: `uv run python -m unittest`
 - Build (to validate it works): `uv build`
 - Review documentation updates: `uvx --with mkdocstrings[python] mkdocs serve`

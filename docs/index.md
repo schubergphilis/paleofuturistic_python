@@ -19,16 +19,16 @@ Give their docs a look-over before continuing if you want to get a better unders
 
 - Initialize with `uvx cruft create --checkout latest https://github.com/schubergphilis/paleofuturistic_python` and fill in your project details.
 - Optional: validate the setup with `uv run python -c "import paleofuturistic_python; print(paleofuturistic_python.hello())"` (replace `paleofuturistic_python` with your project name/slug).
-- Either, run `uv lock` to generate a .lock file, or run `uv add some_lib_you_need` if your project has dependencies.
+- Run `uv sync --all-extras --dev` to download the dependencies and generate a .lock file.
 
 ### Workflow
 
 - Download dependencies (if you need any): `uv add some_lib_you_need`
-- Develop (optional, tinker: `uvx --refresh --with . ptpython`)
+- Develop (optional, tinker: `uvx --with-editable . ptpython`)
 - QA:
-    - Format: `uvx ruff format`
-    - Lint: `uvx ruff check`
-    - Type check: `uvx mypy`
+    - Format: `uv run ruff format`
+    - Lint: `uv run ruff check`
+    - Type check: `uv run mypy`
     - Test: `uv run python -m unittest`
 - Build: `uv build`
 - Document: `uvx --with mkdocstrings[python] mkdocs build`
