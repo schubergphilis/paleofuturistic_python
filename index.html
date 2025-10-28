@@ -143,16 +143,16 @@ Give their docs a look-over before continuing if you want to get a better unders
 <ul>
 <li>Initialize with <code>uvx cruft create --checkout latest https://github.com/schubergphilis/paleofuturistic_python</code> and fill in your project details.</li>
 <li>Optional: validate the setup with <code>uv run python -c "import paleofuturistic_python; print(paleofuturistic_python.hello())"</code> (replace <code>paleofuturistic_python</code> with your project name/slug).</li>
-<li>Either, run <code>uv lock</code> to generate a .lock file, or run <code>uv add some_lib_you_need</code> if your project has dependencies.</li>
+<li>Run <code>uv sync --all-extras --dev</code> to download the dependencies and generate a .lock file.</li>
 </ul>
 <h3 id="workflow">Workflow</h3>
 <ul>
 <li>Download dependencies (if you need any): <code>uv add some_lib_you_need</code></li>
-<li>Develop (optional, tinker: <code>uvx --refresh --with . ptpython</code>)</li>
+<li>Develop (optional, tinker: <code>uvx --with-editable . ptpython</code>)</li>
 <li>QA:<ul>
-<li>Format: <code>uvx ruff format</code></li>
-<li>Lint: <code>uvx ruff check</code></li>
-<li>Type check: <code>uvx mypy</code></li>
+<li>Format: <code>uv run ruff format</code></li>
+<li>Lint: <code>uv run ruff check</code></li>
+<li>Type check: <code>uv run mypy</code></li>
 <li>Test: <code>uv run python -m unittest</code></li>
 </ul>
 </li>
@@ -248,5 +248,5 @@ Or, have a look at <a href="https://github.com/carlovoSBP/kitchen_sink_full_of_c
 
 <!--
 MkDocs version : 1.6.1
-Build Date UTC : 2025-09-26 10:21:22.534011+00:00
+Build Date UTC : 2025-10-28 09:18:49.531507+00:00
 -->
