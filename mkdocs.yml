@@ -14,6 +14,7 @@ theme:
 nav:
   - Home: index.md
   - Walkthrough: walkthrough.md
+  - Extra guides: extra_guides.md
   - About: about.md
 
 copyright: Copyright &copy; 2024 <a href="https://schubergphilis.com/">Schuberg Philis</a>
