@@ -9,7 +9,7 @@ Also, we will publish the project's documentation to GitHub Pages.
 
 You are encouraged to go through this walkthrough twice.
 Upon first run, only execute the instructions and ignore all the explanations underneath.
-Then reread this page in full to get a better grasp of what this template is setting you up for you.
+Then reread this page in full to get a better grasp of what this template is setting up for you.
 
 ## Initializing your project
 
@@ -28,12 +28,12 @@ Instructions:
 ### Managing boilerplate
 
 [cruft](https://cruft.github.io/cruft/) ([cookiecutter](https://cookiecutter.readthedocs.io/en/stable/) under its hood) is a tool for managing boilerplate.
-Like you did, new projects can be instantiated from a template with it.
+New projects can be instantiated from a template with it, like you did above.
 An even more amazing function is that it can update a project's boilerplate when the template changes (also this Paleofuturistic one!).
 See the [extra guides](extra_guides.md#update-your-paleofuturistic-boilerplate) for more information on that.
 
 It might still be noteworthy to point out a few things in the command you used:
-`uvx cruft create -f --checkout latest https://github.com/schubergphilis/paleofuturistic_python`
+`uvx cruft create -f --checkout latest https://github.com/schubergphilis/paleofuturistic_python`.
 The `--checkout latest` in there should speak for itself.
 Now mind the `-f`.
 cruft does not allow editing an existing directory by default for safety.
@@ -54,8 +54,8 @@ Maybe take a look at the .gitignore, maybe not; it's fine; I promise.
 Instructions:
 
 - Get back to the command-line in your local clone.
-- Execute: `uv sync --all-extras --dev`.
-- Execute: `git add --all`, `git commit -m "lock initial dependencies"` and `git push`.
+- Execute `uv sync --all-extras --dev`.
+- Execute `git add --all`, `git commit -m "lock initial dependencies"` and `git push`.
 - Navigate to `https://github.com/<YOUR_GITHUB_HANDLE>/<YOUR_PROJECT_SLUG>/actions`.
 - See that the quality assurance CI now succeeds; what it's exactly doing, you will find out in the next instructions.
 
@@ -73,7 +73,7 @@ All the other things you would want from (uv's) dependency management you can al
 
 By now you might have already guessed that uv acts on dependencies in your environment and uvx is meant for tools that live outside of it.
 
-> A reminder: add the names of the public features you develop to the `__all__` list in `__init__.py`.
+> A reminder: add the names of the public features you develop to the `__all__` list in `src/<YOUR_PROJECT_SLUG>/__init__.py`.
 > This way others (that includes your unittest runs) can conveniently access them upon importing your module.
 
 ## Quality assurance
@@ -92,11 +92,11 @@ Instructions:
 The steps above are the minimal steps to assure quality in any software project.
 When they output that everything is as expected, they should also leave the codebase unchanged.
 The dependencies for these steps are pinned in the `pyproject.toml` to make sure they run the same way locally as in the pipeline.
-The pipeline can run quite quick upon repetition, because caching is enabled, see `.github/workflows/quality_assurance.yaml`.
+The pipeline can run quite quickly upon repetition, because caching is enabled, see `.github/workflows/quality_assurance.yaml`.
 
 Formatting (`uv run ruff format --diff`), type checking (`uv run mypy`) and testing (`uv run python -m unittest`) should speak for themselves.
 The ruff formatter, mypy and Python's build-in testing library are ubiquitous and easy to use.
-Only mypy has a minimal amount of config in the `pyproject.toml` that make it a bit more specific and tight.
+Only mypy has a minimal amount of config in the `pyproject.toml` that makes it a bit more specific and tight.
 
 You can get into the weeds very fast with linting (`uv run ruff check`) though.
 If you go with the flow of this template it's probably going to work out fine for your first 1,000 commits or so.

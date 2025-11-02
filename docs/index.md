@@ -6,8 +6,9 @@
   <img src="./paleofuturistic_python.png?raw=true" alt="Paleofuturistic Environment"/>
 </p>
 
-This is a detached fork of [Straight to the Money 💰](https://github.com/Carlovo/straight_to_the_money).
-Check it out if this template is a bit too involved for you and you want to go with something more simple.
+This project is meant as an enterprise-ready template for developing Python packages.
+If that bar is a bit too high for you, then you can checkout [Straight to the Money 💰](https://github.com/Carlovo/straight_to_the_money).
+Paleofuturistic Python is a detached fork of Straight to the Money 💰.
 
 ## Usage
 
@@ -35,9 +36,5 @@ Give their docs a look-over before continuing if you want to get a better unders
 - Publish: `uv publish`
 
 Can it really be that simple?
-Well, eventually yes, but you will need to set up some connections and credentials still, of course.
+Well, eventually yes, but you will need to setup some connections and credentials still, of course.
 For a slightly more elaborate walkthrough on that, see the [docs](walkthrough.md).
-
-Still skeptical?
-See the [about](about.md) instead.
-Or, have a look at [a kitchen sink project](https://github.com/carlovoSBP/kitchen_sink_full_of_cravings) created with this template.
