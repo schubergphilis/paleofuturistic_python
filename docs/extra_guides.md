@@ -5,7 +5,7 @@
 If this template gets updated and you want to benefit from the new features, follow the steps below:
 
 - Go to the command-line in your local clone of your project.
-- Execute `uvx cruft update`.
+- Execute `uvx cruft update --checkout latest`.
 - The steps after that should be self-explanatory, but there is always [more information available for those who want](https://cruft.github.io/cruft/#updating-a-project).
 
 ## GitHub security enhancements
