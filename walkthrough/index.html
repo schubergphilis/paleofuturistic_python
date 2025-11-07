@@ -41,6 +41,9 @@
                                 <a href="./" class="nav-link active" aria-current="page">Walkthrough</a>
                             </li>
                             <li class="nav-item">
+                                <a href="../extra_guides/" class="nav-link">Extra guides</a>
+                            </li>
+                            <li class="nav-item">
                                 <a href="../about/" class="nav-link">About</a>
                             </li>
                         </ul>
@@ -57,7 +60,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a rel="next" href="../about/" class="nav-link">
+                                <a rel="next" href="../extra_guides/" class="nav-link">
                                     Next <i class="fa fa-arrow-right"></i>
                                 </a>
                             </li>
@@ -122,7 +125,7 @@
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-bs-level="2"><a href="#quality-assurance-formatting-linting-type-checking-and-testing" class="nav-link">Quality assurance (formatting, linting, type checking and testing)</a>
+            <li class="nav-item" data-bs-level="2"><a href="#quality-assurance" class="nav-link">Quality assurance</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -134,11 +137,11 @@
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-bs-level="2"><a href="#publishing-your-python-package" class="nav-link">Publishing your Python package</a>
+            <li class="nav-item" data-bs-level="2"><a href="#publishing-your-python-package-to-pypi" class="nav-link">Publishing your Python package to PyPI</a>
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-bs-level="2"><a href="#bonus-tinkering-within-context" class="nav-link">Bonus: tinkering within context</a>
+            <li class="nav-item" data-bs-level="2"><a href="#bonus-the-ptpython-repl" class="nav-link">Bonus: the ptpython REPL</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -155,132 +158,200 @@
 
 <h1 id="walkthrough">Walkthrough</h1>
 <p>Some things in <a href="../#usage">usage</a> might require a little more effort on the first run.
-Let's go over those things and the rest in a little more detail.</p>
+Let's go over the bootstrapping and the development cycle in full detail.</p>
+<p>In this walkthrough we are going to create a Python library and publish it to PyPI.
+While doing so we will do all the steps you would normally do during a feature development as well.
+Also, we will publish the project's documentation to GitHub Pages.</p>
+<p>You are encouraged to go through this walkthrough twice.
+Upon first run, only execute the instructions and ignore all the explanations underneath.
+Then reread this page in full to get a better grasp of what this template is setting up for you.</p>
 <h2 id="initializing-your-project">Initializing your project</h2>
-<p>You will probably want to manage your project with some version control system and a remote, such as Git and GitHub.
-Personally, I like creating the repository in the remote and then cloning to local.
-That way everything is nicely set up for me.
-Except for the template, of course.</p>
-<p><a href="https://cruft.github.io/cruft/">cruft</a> (<a href="https://cookiecutter.readthedocs.io/en/stable/">cookiecutter</a> under its hood) does not allow editing an existing directory by default for safety.
-Because we just cloned an empty repository, we can assume to be safe though.
-Clone your new repository somewhere.
-From the directory directly above it run:
-<code>uvx cruft create -f --checkout latest https://github.com/schubergphilis/paleofuturistic_python</code>
-(mind the <code>-f</code>).
-cd to your project directory; git add all, commit and push; and you are ready to go.</p>
-<p>Other options would be:</p>
+<p>Instructions:</p>
+<ul>
+<li>Create a repository in GitHub;
+  do not add any additional files upon creation, like .gitignore, LICENSE etc.;
+  make sure you take a project name not already on PyPI, if you want to follow this walkthrough all the way to publishing there.  </li>
+<li>Clone the repo to your development environment.</li>
+<li>Execute this command from the directory directly above: <code>uvx cruft create -f --checkout latest https://github.com/schubergphilis/paleofuturistic_python</code>.</li>
+<li>Answer the questions; <code>project_slug</code> should be the same as the GitHub repository name you chose.</li>
+<li>cd to your project directory; execute <code>git add --all</code>, <code>git commit -m "initial commit"</code> and <code>git push</code>.</li>
+<li>Navigate to <code>https://github.com/&lt;YOUR_GITHUB_HANDLE&gt;/&lt;YOUR_PROJECT_SLUG&gt;/actions</code>.</li>
+<li>See that the quality assurance CI fails; you will fix this in the next instructions.</li>
+</ul>
+<h3 id="managing-boilerplate">Managing boilerplate</h3>
+<p><a href="https://cruft.github.io/cruft/">cruft</a> (<a href="https://cookiecutter.readthedocs.io/en/stable/">cookiecutter</a> under its hood) is a tool for managing boilerplate.
+New projects can be instantiated from a template with it, like you did above.
+An even more amazing function is that it can update a project's boilerplate when the template changes (also this Paleofuturistic one!).
+See the <a href="../extra_guides/#update-your-paleofuturistic-boilerplate">extra guides</a> for more information on that.</p>
+<p>It might still be noteworthy to point out a few things in the command you used:
+<code>uvx cruft create -f --checkout latest https://github.com/schubergphilis/paleofuturistic_python</code>.
+The <code>--checkout latest</code> in there should speak for itself.
+Now mind the <code>-f</code>.
+cruft does not allow editing an existing directory by default for safety.
+Because we just cloned an empty repository, we can assume to be safe though.</p>
+<p>Other options to get to the same state would be:</p>
 <ul>
 <li>create the project with directory from the template with cruft, cd to it; git init, add all, commit, <a href="https://docs.github.com/en/get-started/getting-started-with-git/about-remote-repositories#creating-remote-repositories">set the remote</a> and push.</li>
 <li>create the project with directory from the template with cruft, copy the contents to a cloned repository; git add all, commit and push.</li>
 </ul>
 <h3 id="reviewing-gitignore-and-license">Reviewing .gitignore and LICENSE</h3>
 <p>If you had wanted another license than Apache, you have probably already chosen one and can easily override the templated one (if you do, do it in the <code>pyproject.toml</code> as well).
-Maybe take a second look at the .gitignore, maybe not, it's fine...</p>
+Maybe take a look at the .gitignore, maybe not; it's fine; I promise.</p>
 <h2 id="dependency-management">Dependency management</h2>
+<p>Instructions:</p>
+<ul>
+<li>Get back to the command-line in your local clone.</li>
+<li>Execute <code>uv sync --all-extras --dev</code>.</li>
+<li>Execute <code>git add --all</code>, <code>git commit -m "lock initial dependencies"</code> and <code>git push</code>.</li>
+<li>Navigate to <code>https://github.com/&lt;YOUR_GITHUB_HANDLE&gt;/&lt;YOUR_PROJECT_SLUG&gt;/actions</code>.</li>
+<li>See that the quality assurance CI now succeeds; what it's exactly doing, you will find out in the next instructions.</li>
+</ul>
+<h3 id="dependencies-in-environments">Dependencies in environments</h3>
 <p>Usually a lot or even more of the low-level functionality you need for what you want to develop is already available.
 Luckily, reeling that good stuff in is one of uv's strengths.
-To download all dependencies to get started properly run <code>uv sync --all-extras --dev</code>.
-The <code>--all-extras --dev</code> flags trigger downloading optional and development dependencies respectively.
-After that you can add dependencies like <code>uv add requests</code>.</p>
-<p>These commands do everything you would hope they to do by default.
-Yes, that includes caching and project-based isolation.
+The <code>--all-extras --dev</code> flags from the uv command above triggers downloading optional and development dependencies respectively.
+After that you can add dependencies like for example <code>uv add requests</code> or <code>uv add --dev pytest</code> for dev dependencies.</p>
+<p>These commands do everything you would hope they would do by default.
+Yes, that includes caching and project-based environment isolation.
 For starters just adding some dependencies from PyPI is probably all you want.
 All the other things you would want from (uv's) dependency management you can always look into later.</p>
 <p>By now you might have already guessed that uv acts on dependencies in your environment and uvx is meant for tools that live outside of it.</p>
-<p>Just a reminder: add the names of the public features you develop to the <code>__all__</code> list in <code>__init__.py</code>.
-This way others (that includes your unittest runs) can conveniently access them upon importing the module.</p>
-<h2 id="quality-assurance-formatting-linting-type-checking-and-testing">Quality assurance (formatting, linting, type checking and testing)</h2>
-<p>You can see the config for these steps in the <code>pyproject.toml</code>.
-Formatting (<code>uv run ruff format</code>), type checking (<code>uv run mypy</code>) and testing (<code>uv run python -m unittest</code>) should speak for themselves.
-The ruff formatter, mypy and Python's build-in testing library are ubiquitous and easy to use.</p>
+<blockquote>
+<p>A reminder: add the names of the public features you develop to the <code>__all__</code> list in <code>src/&lt;YOUR_PROJECT_SLUG&gt;/__init__.py</code>.
+This way others (that includes your unittest runs) can conveniently access them upon importing your module.</p>
+</blockquote>
+<h2 id="quality-assurance">Quality assurance</h2>
+<p>Instructions:</p>
+<ul>
+<li>Get back to the command-line in your local clone.</li>
+<li>Execute <code>uv run ruff format --diff</code>; should output <code>4 files already formatted</code>.</li>
+<li>Execute <code>uv run ruff check</code>; should output <code>All checks passed!</code>.</li>
+<li>Execute <code>uv run mypy</code>; should output <code>Success: no issues found in 2 source files</code>.</li>
+<li>Execute <code>uv run python -m unittest</code>; gives multiline output, should end with <code>OK</code>.</li>
+<li>Execute <code>git status</code>; gives multiline output, should end with <code>nothing to commit, working tree clean</code>.</li>
+</ul>
+<h3 id="formatting-linting-type-checking-and-testing">Formatting, linting, type checking and testing</h3>
+<p>The steps above are the minimal steps to assure quality in any software project.
+When they output that everything is as expected, they should also leave the codebase unchanged.
+The dependencies for these steps are pinned in the <code>pyproject.toml</code> to make sure they run the same way locally as in the pipeline.
+The pipeline can run quite quickly upon repetition, because caching is enabled, see <code>.github/workflows/quality_assurance.yaml</code>.</p>
+<p>Formatting (<code>uv run ruff format --diff</code>), type checking (<code>uv run mypy</code>) and testing (<code>uv run python -m unittest</code>) should speak for themselves.
+The ruff formatter, mypy and Python's build-in testing library are ubiquitous and easy to use.
+Only mypy has a minimal amount of config in the <code>pyproject.toml</code> that makes it a bit more specific and tight.</p>
 <p>You can get into the weeds very fast with linting (<code>uv run ruff check</code>) though.
 If you go with the flow of this template it's probably going to work out fine for your first 1,000 commits or so.
 And by that time you can probably figure out how to stop a pesky linter from undoing your intricacies,
 so my advice would be to not give it too much thought.
 (If you feel like getting into the weeds early though, <a href="https://docs.astral.sh/ruff/configuration/">have at you</a>.)</p>
+<p>Small thing worth mentioning is that the <code>pyproject.toml</code> is setup such that the ruff linter and formatter should not contradict each other.
+Also, the activated linting rules are a little more than the default, mainly because isort is really convenient.</p>
 <h2 id="building-your-package">Building your package</h2>
+<p>Instructions:</p>
+<ul>
+<li>Get back to the command-line in your local clone.</li>
+<li>Execute <code>uv build</code>;
+  gives multiline output, should end with <code>Successfully built dist/&lt;YOUR_PROJECT_SLUG&gt;-0.1.0-py3-none-any.whl</code>.</li>
+<li>Execute <code>git status</code>;
+  gives multiline output, should end with <code>nothing to commit, working tree clean</code>.</li>
+</ul>
+<h3 id="the-artifacts-to-distribute">The artifacts to distribute</h3>
 <p>uv has its own build backend nowadays.
 It works only for pure Python projects at the moment, but that's probably good enough for most projects.
-If you have more special needs you probably already know what you want and can configure that in the <code>pyproject.toml</code>.</p>
-<p>Other than that, this step should simply be a <code>uv build</code> command that just works.</p>
+If you have more special needs you probably already know what you want and can configure that under <code>[build-system]</code> in the <code>pyproject.toml</code>.
+Also, uv is not so sure the build backend won't significantly change in the future.
+For that reason there is an upper limit in the <code>pyproject.toml</code> on uv's minor version as per their best practices.
+(If you ever update uv beyond that version and this breaks your build step for that reason, check back on this template and <a href="../extra_guides/#update-your-paleofuturistic-boilerplate">update</a>.)</p>
+<p>Other than that, this step should simply be a <code>uv build</code> command that just works.
+Locally you will probably only run this command to validate it works though.
+Eventually it's a pipeline that should build and publish.</p>
 <h2 id="previewing-and-publishing-your-documentation">Previewing and publishing your documentation</h2>
-<p>So <code>uvx --with mkdocstrings[python] mkdocs build</code> nicely converts your documentation to a static website...
-Now what and what is that magic <code>--with</code> statement?
-First the <code>--with</code>, it injects additional dependencies into the environment for mkdocs, in this case mkdocstrings with its python add-on.
-Run the command and check you project's documentation to see the fancy feature descriptions mkdocstrings can make for you from a docstring.
-(I found mkdocstrings works best with numpy style docs, so that's the template's default; you can change that in the <code>mkdocs.yaml</code>.)</p>
-<p>Wait, how do I check my documentation and how do I publish it?
-MkDocs has two convenient commands build in for that:</p>
+<p>Instructions:</p>
 <ul>
-<li><code>uvx --with mkdocstrings[python] mkdocs serve</code> will serve a preview on local host <code>http://127.0.0.1:8000/</code> (with watch files!).</li>
-<li><code>uvx --with mkdocstrings[python] mkdocs gh-deploy</code> will upload your documentation to GitHub Pages.</li>
+<li>Get back to the command-line in your local clone.</li>
+<li>Execute <code>uvx --with mkdocstrings[python] mkdocs build</code>;
+  gives multiline output, should end with <code>INFO    -  Documentation built in &lt;X&gt; seconds</code>.</li>
+<li>Execute <code>uvx --with mkdocstrings[python] mkdocs serve</code>;
+  gives multiline output, should end with <code>INFO    -  &lt;X&gt; Serving on http://127.0.0.1:8000/</code>;</li>
+<li>Navigate to <code>http://127.0.0.1:8000/</code>;
+  some rudimentary documentation should be there.</li>
+<li>Get back to the command-line in your local clone;
+  terminate the serving process.</li>
+<li>Execute <code>uvx --with mkdocstrings[python] mkdocs gh-deploy</code>;
+  gives multiline output, should end with <code>INFO    -  Your documentation should shortly be available at: https://&lt;YOUR_GITHUB_HANDLE&gt;.github.io/&lt;YOUR_PROJECT_SLUG&gt;/</code>.</li>
+<li>Navigate to <code>https://github.com/&lt;YOUR_GITHUB_HANDLE&gt;/&lt;YOUR_PROJECT_SLUG&gt;/actions</code>;
+  a GitHub Action should be running to deploy you docs.</li>
+<li>Wait until the action finishes then navigate to <code>https://&lt;YOUR_GITHUB_HANDLE&gt;.github.io/&lt;YOUR_PROJECT_SLUG&gt;/</code>;
+  it should display the same documentation you just served locally.</li>
+<li>Get back to the command-line in your local clone.</li>
+<li>Execute <code>git status</code>;
+  gives multiline output, should end with <code>nothing to commit, working tree clean</code>.</li>
 </ul>
-<p>Both these commands have a lot of options and MkDocs has a lot more to offer in general (including automated publishing to other hosting parties).
-<a href="https://www.mkdocs.org/">See for yourself.</a></p>
-<h2 id="publishing-your-python-package">Publishing your Python package</h2>
+<h3 id="a-very-feature-rich-static-website">A very feature-rich static website</h3>
+<p>Let's first explain a bit about that magic <code>--with</code> in the commands above.
+It injects additional dependencies into the environment in this case mkdocstrings with its python add-on.</p>
+<p>Now, in your project directory go to <code>docs/index.md</code> and see how little was needed to produce such a fantastic skeleton for documentation.
+You do need to keep every docstring nice and tidy to make that work though.
+I found mkdocstrings works best with numpy style docs, so that's the template's default.
+You can change that and more in the <code>mkdocs.yaml</code>.
+Don't try to understand all of that at once...</p>
+<p>MkDocs offers far more than everything you accomplished above, especially combined with even more plugins.
+<a href="https://www.mkdocs.org/">See for yourself.</a>
+Personal favorite out of the box: watch files.
+Others might particularly like automated publishing to other documentation hosting parties than GitHub Pages.</p>
+<h2 id="publishing-your-python-package-to-pypi">Publishing your Python package to PyPI</h2>
+<p>Instructions:</p>
+<ul>
+<li>Navigate to <code>https://github.com/&lt;YOUR_GITHUB_HANDLE&gt;/&lt;YOUR_PROJECT_SLUG&gt;/settings/environments</code>.</li>
+<li>Create an environment named <code>pypi</code>.</li>
+<li>Go to <a href="https://pypi.org/">PyPI</a> and login;
+  if you have no account there, create one first.</li>
+<li>Configure a <a href="https://docs.pypi.org/trusted-publishers/adding-a-publisher/">trusted publisher</a>.</li>
+<li>Go to <code>https://github.com/&lt;YOUR_GITHUB_HANDLE&gt;/&lt;YOUR_PROJECT_SLUG&gt;/actions/workflows/release.yaml</code> and run the workflow.</li>
+<li>Wait for the workflow to finish, then get back to the command-line.</li>
+<li>Execute <code>uv run --isolated --no-project --with &lt;YOUR_PROJECT_SLUG&gt; python -c "from &lt;YOUR_PROJECT_SLUG&gt; import hello; print(hello())"</code>;
+  should output <code>Hello you from &lt;YOUR_PROJECT_SLUG&gt;!</code>.</li>
+</ul>
+<h3 id="beyond-v010">Beyond v0.1.0</h3>
+<p>If all of the above worked, congratulations!
+Of course you are not reading this for just celebration, but you wanted to know more about what happened under the hood.</p>
+<p>uv also supports publishing from/to anywhere with credentials.
+But, if possible, publishing with a trusted publisher unburdens you from credential management.</p>
+<p>In the <code>release.yaml</code>, note caching is explicitly disabled.
+This makes the release step more dependable, because by accident wrong dependencies could end up in the cache.
+Also deliberately by the way, so this is also a security measure.
+If you want to know more, lookup something like: GitHub Actions cache poisoning.</p>
+<p>Setting the <code>pypi</code> environment did not add security in the steps above.
+You can (and should) use it for that way though.
+This walkthrough is getting very long already, so more on how to set that up is in the <a href="../extra_guides/#github-security-enhancements">extra guides</a>.</p>
+<p>Also in the extra guides you can find the <a href="../extra_guides/#executable-apps">minimal steps</a> on how to build and publish a CLI from this template.
+Unless your project will be really simple (which it never will be), I would advise to make separate lib and app/cli projects for business logic and integration respectively.
+Otherwise you could just use a simple <a href="https://docs.astral.sh/uv/guides/scripts/#declaring-script-dependencies">script with inline dependencies</a>.</p>
 <blockquote>
-<p>Before going forward, don't forget to version bump in the <code>pyproject.toml</code> and forward that to the lockfile with <code>uv lock</code>.<br />
-Also, replace <code>paleofuturistic_python</code> to your project's slug in the examples below.</p>
+<p>Final important note:
+Before publishing a next version, don't forget to version bump in the <code>pyproject.toml</code> and forward that to the lockfile with <code>uv lock</code>.
+Then of course git add, commit and push, and then you should be good to go for publishing again.
+Hopefully these steps will be automated in a future version of this template.</p>
 </blockquote>
-<p>It's all done; time to make your work available to the masses!
-<code>uv publish</code> can be configured to go a lot of places, but let's just admit PyPI is the standard.</p>
-<p>While you can make an account at <a href="https://pypi.org/">PyPI</a>,
-download a credential
-and <a href="https://docs.astral.sh/uv/guides/publish/#publishing-your-package">configure uv</a> to publish that way,
-it might be a better a idea to replace the credentials with <a href="https://docs.pypi.org/trusted-publishers/adding-a-publisher/">configuring a trusted publisher</a>.
-If you follow the trusted publisher guide you only have to change the owner and repository name from the example to make the release flow of this template work.</p>
-<p>Afterwards run <code>uv run --isolated --no-project --with paleofuturistic_python python -c "import paleofuturistic_python; print(paleofuturistic_python.hello())"</code> to test whether everything went OK.</p>
-<h3 id="executable-apps">Executable apps</h3>
-<p>Up until now we haven't specified yet whether the project is creating a package that will be a library or application.
-This workflow template was created for libraries, because those are usually the most involved to get going.
-Making the template able to produce Python apps is not much work luckily.
-(Making stand-alone apps is a whole other story though!
-In that case you may want to look at <a href="https://pyinstaller.org/">PyInstaller</a> or <a href="https://nuitka.net/">Nuitka</a> for example.)</p>
-<p>To make the package an executable module that supports something like <code>python -m paleofuturistic_python</code> (or <code>uv run --isolated --no-project --with paleofuturistic_python python -m paleofuturistic_python</code>) create a <code>__main__.py</code> that looks something like:</p>
-<pre><code class="language-Python">from paleofuturistic_python import hello
-
-
-def main() -&gt; None:
-    print(hello())
-
-
-if __name__ == &quot;__main__&quot;:
-    main()
-</code></pre>
-<p>Then to make tools like uvx and pipx be able to execute the module like so <code>uvx --with paleofuturistic_python paleofuturistic_python</code> add the following to the <code>pyproject.toml</code>.</p>
-<pre><code class="language-toml">[project.scripts]
-paleofuturistic_python = &quot;paleofuturistic_python.__main__:main&quot;
-</code></pre>
-<p>If you are setting out to build an app, you can implement all the boilerplate yourself with <code>os</code> and <code>argparse</code>.
-You could also look into available frameworks, for example for CLIs: <a href="https://typer.tiangolo.com/">Typer</a>.</p>
-<h3 id="security-considerations">Security considerations</h3>
-<p>Note you have just bestowed great power upon GitHub.
-With great power comes... No wait we have something serious to say here!</p>
-<p>If you followed the guides linked above you will have already setup a separate GitHub env for publishing and made use of PyPI's trusted publishing.
-That's great, but it's advisable to put up an even higher fence against attacks.</p>
-<p>You can for example use the following settings to protect your repository from outsiders:</p>
+<h2 id="bonus-the-ptpython-repl">Bonus: the ptpython REPL</h2>
 <ul>
-<li>Protect at least the <code>main</code> branch and <code>v*</code> tags with rulesets; configure them to enforce updates via peer-reviewed pull requests from forks.</li>
-<li>Enable "Limit to users explicitly granted read or higher access" under "Code review limits".</li>
-<li>Set "Require approval for all external contributors" under "Actions permissions" -&gt; "Approval for running fork pull request workflows from contributors".</li>
-<li>Set "Read repository contents and packages permissions" (no default repo write) under "Actions permissions" -&gt; "Workflow permissions".</li>
-<li>Uncheck "Allow GitHub Actions to create and approve pull requests" under "Actions permissions" -&gt; "Workflow permissions".</li>
-<li>You could even go as far as setting "Temporary interaction limits" under "Interaction limits".</li>
+<li>Get back to the command-line in your local clone.</li>
+<li>Execute <code>uvx --with-editable . ptpython</code>;
+  you should now be in ptpython's REPL.</li>
+<li>Type <code>from &lt;YOUR_PROJECT_SLUG&gt; import hello</code> and enter;
+  note the hinting and coloring to help you.</li>
+<li>Type <code>hello(someone="me")</code> and enter;
+  should output <code>'Hello me from &lt;YOUR_PROJECT_SLUG&gt;!'</code>.</li>
+<li>Execute <code>exit()</code> to exit the REPL.</li>
 </ul>
-<p>Protecting your repository from insider threats is far harder, but this might help:</p>
-<ul>
-<li>Set some "Required reviewers" under "Environments" -&gt; "Deployment protection rules".</li>
-<li>Cumbersome to implement, but effective: org/repo admin access only for non-personal accounts which require 4-eyes approval for assuming.</li>
-</ul>
-<h2 id="bonus-tinkering-within-context">Bonus: tinkering within context</h2>
+<h3 id="tinkering-within-context">Tinkering within context</h3>
 <p>You could simply run <code>uv run python</code> and tinker away in your virtual env, but quality of life in ptpython's REPL is simply much better.
 Directly running <code>uvx ptpython</code> doesn't work here, because uv's whole point is env separation.
 To give your current project's context to ptpython you can run <code>uvx --with-editable . ptpython</code>.
-<code>--with-editable</code> is used instead of <code>--with</code> to make uv look at the latest local updates of your code.</p>
+<code>--with-editable</code> is used instead of <code>--with</code> to make uv look at the latest local updates of your code (including its dependencies!).</p>
 <h2 id="the-updated-happy-path-workflow">The updated happy path workflow</h2>
 <p>When you completed all the above successfully, pat yourself on the back for me.
-The real reward is of course a reliable way of developing your Python project.
-Considering the publishing and all, you may want to alter the workflow in this project's introduction to something like:</p>
+The real reward is of course a reliable way of developing your Python project.</p>
+<p>Now that you went through all the bootstrapping needed only once, your development happy flow may look something like this:</p>
 <ul>
 <li>Download dependencies (if you need any): <code>uv add some_lib_you_need</code></li>
 <li>Develop (optional, tinker: <code>uvx --with-editable . ptpython</code>)</li>

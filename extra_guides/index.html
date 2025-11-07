@@ -8,7 +8,7 @@
         <meta name="author" content="Carlo 'carlovo' van Overbeek">
         
         <link rel="shortcut icon" href="../img/favicon.ico">
-        <title>About - Paleofuturistic Python</title>
+        <title>Extra guides - Paleofuturistic Python</title>
         <link href="../css/bootstrap.min.css" rel="stylesheet">
         <link href="../css/fontawesome.min.css" rel="stylesheet">
         <link href="../css/brands.min.css" rel="stylesheet">
@@ -41,10 +41,10 @@
                                 <a href="../walkthrough/" class="nav-link">Walkthrough</a>
                             </li>
                             <li class="nav-item">
-                                <a href="../extra_guides/" class="nav-link">Extra guides</a>
+                                <a href="./" class="nav-link active" aria-current="page">Extra guides</a>
                             </li>
                             <li class="nav-item">
-                                <a href="./" class="nav-link active" aria-current="page">About</a>
+                                <a href="../about/" class="nav-link">About</a>
                             </li>
                         </ul>
 
@@ -55,17 +55,17 @@
                             </a>
                         </li>
                             <li class="nav-item">
-                                <a rel="prev" href="../extra_guides/" class="nav-link">
+                                <a rel="prev" href="../walkthrough/" class="nav-link">
                                     <i class="fa fa-arrow-left"></i> Previous
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a rel="next" class="nav-link disabled">
+                                <a rel="next" href="../about/" class="nav-link">
                                     Next <i class="fa fa-arrow-right"></i>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="https://github.com/schubergphilis/paleofuturistic_python/blob/main/docs/about.md" class="nav-link"><i class="fa-brands fa-github"></i> Edit on GitHub</a>
+                                <a href="https://github.com/schubergphilis/paleofuturistic_python/blob/main/docs/extra_guides.md" class="nav-link"><i class="fa-brands fa-github"></i> Edit on GitHub</a>
                             </li>
                             <li class="nav-item dropdown">
                               <button id="theme-menu" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static" aria-label="Toggle theme" class="nav-link dropdown-toggle">
@@ -115,8 +115,20 @@
     <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
         <ul class="nav flex-column">
             
-            <li class="nav-item" data-bs-level="1"><a href="#about" class="nav-link">About</a>
+            <li class="nav-item" data-bs-level="1"><a href="#extra-guides" class="nav-link">Extra guides</a>
               <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#update-your-paleofuturistic-boilerplate" class="nav-link">Update your Paleofuturistic boilerplate</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#github-security-enhancements" class="nav-link">GitHub security enhancements</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#executable-apps" class="nav-link">Executable apps</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
               </ul>
             </li>
         </ul>
@@ -124,10 +136,61 @@
 </div></div>
                     <div class="col-md-9" role="main">
 
-<h1 id="about">About</h1>
-<p>This project is meant as an enterprise-ready template for developing Python packages.
-If that bar is a bit too high for you, then you can checkout <a href="https://github.com/Carlovo/straight_to_the_money">Straight to the Money 💰</a>.
-Paleofuturistic Python is a detached fork of Straight to the Money 💰.</p></div>
+<h1 id="extra-guides">Extra guides</h1>
+<h2 id="update-your-paleofuturistic-boilerplate">Update your Paleofuturistic boilerplate</h2>
+<p>If this template gets updated and you want to benefit from the new features, follow the steps below:</p>
+<ul>
+<li>Go to the command-line in your local clone of your project.</li>
+<li>Execute <code>uvx cruft update --checkout latest</code>.</li>
+<li>The steps after that should be self-explanatory, but there is always <a href="https://cruft.github.io/cruft/#updating-a-project">more information available for those who want</a>.</li>
+</ul>
+<h2 id="github-security-enhancements">GitHub security enhancements</h2>
+<p>Note you have just bestowed great power upon GitHub.
+With great power comes... No wait we have something serious to say here!</p>
+<p>If you followed the complete walkthrough from this template you will have already setup a separate GitHub env for publishing and made use of PyPI's trusted publishing.
+That's great, but it's advisable to put up an even higher fence against attacks.</p>
+<p>You can for example use the following settings to protect your repository from outsiders:</p>
+<ul>
+<li>Protect at least the <code>main</code> branch and <code>v*</code> tags with rulesets; configure them to enforce updates via peer-reviewed pull requests from forks.</li>
+<li>Edit the <code>pypi</code> environment so that only the protected branches and tags can use it.</li>
+<li>Enable "Limit to users explicitly granted read or higher access" under "Code review limits".</li>
+<li>Set "Require approval for all external contributors" under "Actions permissions" -&gt; "Approval for running fork pull request workflows from contributors".</li>
+<li>Set "Read repository contents and packages permissions" (no default repo write) under "Actions permissions" -&gt; "Workflow permissions".</li>
+<li>Uncheck "Allow GitHub Actions to create and approve pull requests" under "Actions permissions" -&gt; "Workflow permissions".</li>
+<li>You could even go as far as setting "Temporary interaction limits" under "Interaction limits".</li>
+</ul>
+<p>Protecting your repository from insider threats is far harder, but this might help:</p>
+<ul>
+<li>Set some "Required reviewers" under "Environments" -&gt; "Deployment protection rules".</li>
+<li>Cumbersome to implement, but effective: org/repo admin access only for non-personal accounts which require 4-eyes approval for assuming.</li>
+</ul>
+<h2 id="executable-apps">Executable apps</h2>
+<blockquote>
+<p>You may need to flush uv's cache after implementing the code below before the commands will work.</p>
+</blockquote>
+<p>This workflow template was created for libraries, because those are usually the most involved to get going.
+Making the template able to produce Python apps is not much work luckily.
+(Making stand-alone apps is a whole other story though!
+In that case you may want to look at <a href="https://pyinstaller.org/">PyInstaller</a> or <a href="https://nuitka.net/">Nuitka</a> for example.)</p>
+<p>To make the package an executable module that supports something like <code>uv run python -m &lt;YOUR_PROJECT_SLUG&gt;</code> create a <code>src/&lt;YOUR_PROJECT_SLUG&gt;/__main__.py</code> that looks something like:</p>
+<pre><code class="language-Python">from &lt;YOUR_PROJECT_SLUG&gt; import hello
+
+
+def main() -&gt; None:
+    print(hello())
+
+
+if __name__ == &quot;__main__&quot;:
+    main()
+</code></pre>
+<p>Then to make tools like uvx and pipx be able to execute the module like so <code>uvx --with-editable . &lt;YOUR_PROJECT_SLUG&gt;</code> add the following to the <code>pyproject.toml</code>.</p>
+<pre><code class="language-toml">[project.scripts]
+&lt;YOUR_PROJECT_SLUG&gt; = &quot;&lt;YOUR_PROJECT_SLUG&gt;.__main__:main&quot;
+</code></pre>
+<p>After publishing your package to PyPI a simple <code>uvx &lt;YOUR_PROJECT_SLUG&gt;</code> should do.
+(And <code>uv run --isolated --no-project --with &lt;YOUR_PROJECT_SLUG&gt; python -m &lt;YOUR_PROJECT_SLUG&gt;</code> coming back to the example above.)</p>
+<p>If you are setting out to build an app, you can implement all the boilerplate yourself with <code>os</code> and <code>argparse</code>.
+You could also look into available frameworks, for example for CLIs: <a href="https://typer.tiangolo.com/">Typer</a>.</p></div>
             </div>
         </div>
 
