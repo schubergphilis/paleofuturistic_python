@@ -1,18 +1,17 @@
-name: Publish to PyPI
+name: Publish to GitHub Pages
 
 on:
   release:
     types: [published]
 
+# This job is kept separate from the publish to PyPI job (release.yaml) for security reasons
+
 jobs:
   publish:
-    name: Publish to PyPI
+    name: Publish to GitHub Pages
     runs-on: ubuntu-latest
-    environment:
-      name: pypi
     permissions:
-      id-token: write
-      contents: read
+      contents: write
 
     steps:
       - name: Checkout repository
@@ -22,10 +21,10 @@ jobs:
         uses: ./.github/actions/setup-env
         with:
           enable-uv-cache: false # No caching to ensure correct dependencies for publishing
-          sync-uv: false
+          sync-uv: true
 
-      - name: Build package
-        run: uv build
+      - name: Build docs
+        run: uv run mkdocs build
 
-      - name: Publish package
-        run: uv publish
+      - name: Publish docs
+        run: uv run mkdocs gh-deploy

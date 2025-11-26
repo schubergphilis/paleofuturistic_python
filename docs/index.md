@@ -32,7 +32,7 @@ Give their docs a look-over before continuing if you want to get a better unders
     - Type check: `uv run mypy`
     - Test: `uv run python -m unittest`
 - Build: `uv build`
-- Document: `uvx --with mkdocstrings[python] mkdocs build`
+- Document: `uv run mkdocs build`
 - Publish: `uv publish`
 
 Can it really be that simple?

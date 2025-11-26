@@ -30,5 +30,5 @@ Prerequisite: [uv](https://docs.astral.sh/uv/)
     - Type check: `uv run mypy`
     - Test: `uv run python -m unittest`
 - Build (to validate it works): `uv build`
-- Review documentation updates: `uvx --with mkdocstrings[python] mkdocs serve`
+- Review documentation updates: `uv run mkdocs serve`
 - Make a pull request.

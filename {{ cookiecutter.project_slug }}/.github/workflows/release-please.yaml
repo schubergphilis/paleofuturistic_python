@@ -1,0 +1,20 @@
+name: Release Please
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Release Please
+        uses: googleapis/release-please-action@16a9c90856f42705d54a6fda1823352bdc62cf38 # v4.4.0
+        with:
+          token: ${{ secrets.RELEASE_PLEASE_TOKEN }}
+          # advanced configuration is needed as long as this issue is open:
+          # https://github.com/googleapis/release-please/issues/2561
+          # both below are the defaults, but good to make the relation explicit
+          config-file: release-please-config.json
+          manifest-file: .release-please-manifest.json
