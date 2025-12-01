@@ -4,7 +4,7 @@ Some things in [usage](index.md#usage) might require a little more effort on the
 Let's go over the bootstrapping and the development cycle in full detail.
 
 In this walkthrough we are going to create a Python library and publish it to PyPI.
-While doing so we will do all the steps you would normally do during a feature development as well.
+While doing so we will do all the steps you would normally do during feature development as well.
 Also, we will publish the project's documentation to GitHub Pages.
 
 You are encouraged to go through this walkthrough twice.
@@ -104,7 +104,7 @@ Also, the activated linting rules are a little more than the default, mainly bec
 Instructions:
 
 - Execute `uv build`;
-  gives multiline output, should end with `Successfully built dist/<YOUR_PROJECT_SLUG>-0.1.0-py3-none-any.whl`.
+  gives multiline output, should end with `Successfully built dist/<YOUR_PROJECT_SLUG>-0.0.0-py3-none-any.whl`.
 - Execute `git status`;
   gives multiline output, should end with `nothing to commit, working tree clean`.
 
@@ -155,13 +155,16 @@ Instructions:
 
 - Navigate to `https://github.com/settings/personal-access-tokens`.
 - Generate a new token;
-  it should have `Read access to metadata` and `Read and Write access to code and pull requests` on ONLY the repository you are working with now.
-- Navigate to `https://github.com/carlovoSBP/cvo251102app/settings/secrets/actions/new`.
+  it should have access "Read and Write" on "Contents" and "Pull requests" on ONLY the repository you are working with now,
+  this will also automatically grant access "Read-only" on "Metadata".
+- Go to `https://github.com/<YOUR_GITHUB_HANDLE>/<YOUR_PROJECT_SLUG>/settings/secrets/actions/new`.
 - Set `RELEASE_PLEASE_TOKEN` as Name and the token you just generated as Secret, and click `Add secret`.
 - Get back to the command-line in your local clone.
-- Execute `git push`.
-- Navigate to `https://github.com/<YOUR_GITHUB_HANDLE>/<YOUR_PROJECT_SLUG>/actions`.
-- See that the Quality Assurance CI and Release Please workflows succeed.
+- Execute `git commit --allow-empty -m "feat: release initial version"` and `git push`.
+- Navigate to `https://github.com/<YOUR_GITHUB_HANDLE>/<YOUR_PROJECT_SLUG>/actions`;
+  see that the Quality Assurance CI and Release Please workflows succeed.
+- Go to `https://github.com/<YOUR_GITHUB_HANDLE>/<YOUR_PROJECT_SLUG>/pull/1`;
+  see that Release Please created a pull request for you.
 
 ### Release orchestration
 
@@ -192,13 +195,13 @@ See the [extra guides](extra_guides.md#github-security-enhancements) on some mor
   if you have no account there, create one first.
 - Configure a [trusted publisher](https://docs.pypi.org/trusted-publishers/adding-a-publisher/).
 - Go to `https://github.com/<YOUR_GITHUB_HANDLE>/<YOUR_PROJECT_SLUG>/pull/1` and approve and (squash) merge the pull request.
-- Navigate to `https://github.com/<YOUR_GITHUB_HANDLE>/<YOUR_PROJECT_SLUG>/actions`;
+- Go to `https://github.com/<YOUR_GITHUB_HANDLE>/<YOUR_PROJECT_SLUG>/actions`;
   a GitHub Action should be running to create a GitHub release.
 - Wait for the workflows to finish, then two other GitHub workflows should spawn triggered by the creation the release;
   these actions should publish you package to PyPI and prepare your documentation for publishing to GitHub Pages respectively;
   the latter action should spawn another workflow that actually publishes your docs on GitHub Pages.
 - Wait until all actions finish.
-- Navigate to `https://github.com/<YOUR_GITHUB_HANDLE>/<YOUR_PROJECT_SLUG>/releases`;
+- Go to `https://github.com/<YOUR_GITHUB_HANDLE>/<YOUR_PROJECT_SLUG>/releases`;
   note that a release has been created.
 - Get back to the command-line in your local clone.
 - Execute `git pull`;
