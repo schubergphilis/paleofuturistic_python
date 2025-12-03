@@ -13,7 +13,7 @@ If this template gets updated and you want to benefit from the new features, fol
 Note you have just bestowed great power upon GitHub.
 With great power comes... No wait we have something serious to say here!
 
-If you followed the complete walkthrough from this template you will have already setup a separate GitHub env for publishing and made use of PyPI's trusted publishing.
+If you followed the complete walkthrough from this template you will have already set up a separate GitHub env for publishing and made use of PyPI's trusted publishing.
 That's great, but it's advisable to put up an even higher fence against attacks.
 
 You can for example use the following settings to protect your repository from outsiders:

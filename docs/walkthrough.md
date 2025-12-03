@@ -18,7 +18,7 @@ Instructions:
 - Create a repository in GitHub;
   do not add any additional files upon creation, like .gitignore, LICENSE etc.;
   make sure you take a project name not already on PyPI, if you want to follow this walkthrough all the way to publishing there;
-  make sure you make the repo public if you want to, if you want to follow this walkthrough all the way to publishing the documentation on GitHub Pages.
+  make sure you make the repo public, if you want to follow this walkthrough all the way to publishing the documentation on GitHub Pages.
 - Clone the repo to your development environment.
 - Execute this command from the directory directly above: `uvx cruft create -f --checkout latest https://github.com/schubergphilis/paleofuturistic_python`.
 - Answer the questions; `project_slug` should be the same as the GitHub repository name you chose.
@@ -27,7 +27,7 @@ Instructions:
   this gives multiline output and should state something about having downloaded and installed a lot of packages successfully.
 - Execute `git add --all` and `git commit -m "chore: lock initial dependencies"`.
 - Do not git push yet!
-  This would trigger CI which we will come back to later.
+  This would trigger CI which we will cover later.
 
 ### Managing boilerplate
 
@@ -97,7 +97,7 @@ And by that time you can probably figure out how to stop a pesky linter from und
 so my advice would be to not give it too much thought.
 (If you feel like getting into the weeds early though, [have at you](https://docs.astral.sh/ruff/configuration/).)
 
-Small thing worth mentioning is that the `pyproject.toml` is setup such that the ruff linter and formatter should not contradict each other.
+Small thing worth mentioning is that the `pyproject.toml` is set up such that the ruff linter and formatter should not contradict each other.
 Also, the activated linting rules are a little more than the default, mainly because isort is really convenient.
 
 ## Building your package

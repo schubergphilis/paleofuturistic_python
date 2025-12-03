@@ -1,4 +1,4 @@
-name: Common Setup
+name: Common setup
 inputs:
   enable-uv-cache:
     required: false
