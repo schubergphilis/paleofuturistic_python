@@ -18,12 +18,10 @@ That's great, but it's advisable to put up an even higher fence against attacks.
 
 You can for example use the following settings to protect your repository from outsiders:
 
-- Protect at least the `main` branch and `v*` tags with rulesets; configure them to enforce updates via peer-reviewed pull requests from forks.
-- Edit the `pypi` environment so that only the protected branches and tags can use it.
+- Protect at least the `main` branch and `v*` tags with rulesets;
+  for example enforce updates via peer-reviewed pull requests on `main`, and forbid deleting and editing tags.
 - Enable "Limit to users explicitly granted read or higher access" under "Code review limits".
 - Set "Require approval for all external contributors" under "Actions permissions" -> "Approval for running fork pull request workflows from contributors".
-- Set "Read repository contents and packages permissions" (no default repo write) under "Actions permissions" -> "Workflow permissions".
-- Uncheck "Allow GitHub Actions to create and approve pull requests" under "Actions permissions" -> "Workflow permissions".
 - You could even go as far as setting "Temporary interaction limits" under "Interaction limits".
 
 Protecting your repository from insider threats is far harder, but this might help:

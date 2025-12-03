@@ -7,7 +7,10 @@ on:
 
 jobs:
   release:
+    name: Release Please
     runs-on: ubuntu-latest
+    environment:
+      name: release-please
     steps:
       - name: Release Please
         uses: googleapis/release-please-action@16a9c90856f42705d54a6fda1823352bdc62cf38 # v4.4.0

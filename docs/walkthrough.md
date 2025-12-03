@@ -17,7 +17,8 @@ Instructions:
 
 - Create a repository in GitHub;
   do not add any additional files upon creation, like .gitignore, LICENSE etc.;
-  make sure you take a project name not already on PyPI, if you want to follow this walkthrough all the way to publishing there.  
+  make sure you take a project name not already on PyPI, if you want to follow this walkthrough all the way to publishing there;
+  make sure you make the repo public if you want to, if you want to follow this walkthrough all the way to publishing the documentation on GitHub Pages.
 - Clone the repo to your development environment.
 - Execute this command from the directory directly above: `uvx cruft create -f --checkout latest https://github.com/schubergphilis/paleofuturistic_python`.
 - Answer the questions; `project_slug` should be the same as the GitHub repository name you chose.
@@ -157,12 +158,13 @@ Instructions:
 - Generate a new token;
   it should have access "Read and Write" on "Contents" and "Pull requests" on ONLY the repository you are working with now,
   this will also automatically grant access "Read-only" on "Metadata".
-- Go to `https://github.com/<YOUR_GITHUB_HANDLE>/<YOUR_PROJECT_SLUG>/settings/secrets/actions/new`.
-- Set `RELEASE_PLEASE_TOKEN` as Name and the token you just generated as Secret, and click `Add secret`.
+- Go to `https://github.com/<YOUR_GITHUB_HANDLE>/<YOUR_PROJECT_SLUG>/settings/environments/new` and create an environment called `release-please`.
+- Set "Deployment branches and tags" to only allow branch `main` to use the new environment.
+- Set `RELEASE_PLEASE_TOKEN` as an environment secret with the token you just generated.
 - Get back to the command-line in your local clone.
 - Execute `git commit --allow-empty -m "feat: release initial version"` and `git push`.
 - Navigate to `https://github.com/<YOUR_GITHUB_HANDLE>/<YOUR_PROJECT_SLUG>/actions`;
-  see that the Quality Assurance CI and Release Please workflows succeed.
+  see that the "Quality Assurance CI" and "Release Please" workflows succeed.
 - Go to `https://github.com/<YOUR_GITHUB_HANDLE>/<YOUR_PROJECT_SLUG>/pull/1`;
   see that Release Please created a pull request for you.
 
@@ -182,24 +184,24 @@ Release Please expects commits to adhere to [Conventional Commits](https://www.c
 This is a good idea anyway, so that should be a reasonable demand.
 (When merging commits into the main branch with pull requests, it is probably easiest to make the PR title adhere to Conventional Commits and to 'squash merge'.)
 
-Sadly, Release Please does require a GitHub token to operate, because actions triggered from pull requests cannot edit pull request via default permissions.
-The token is something quite sensitive to manage, but worth that effort.
-Be very careful on new workflows that can create toxic permission combinations which allow pull requests from strangers to escalate privileges.
+Sadly, Release Please does require a dedicated GitHub token to operate, because actions triggered from pull requests are too limited for this template when operating with the default GitHub token.
+The token is something quite sensitive to manage, because it breaks those (security) limits, but worth that effort.
+Be especially careful on new workflows that create toxic permission combinations which allow pull requests from strangers to escalate privileges.
 See the [extra guides](extra_guides.md#github-security-enhancements) on some more tips on securing your repository.
 
 ## Publishing to PyPI and GitHub Pages
 
-- Navigate to `https://github.com/<YOUR_GITHUB_HANDLE>/<YOUR_PROJECT_SLUG>/settings/environments`.
-- Create an environment named `pypi`.
+- Navigate to `https://github.com/<YOUR_GITHUB_HANDLE>/<YOUR_PROJECT_SLUG>/settings/environments/new` and create an environment called `pypi`.
+- Set "Deployment branches and tags" to only allow tags `v*` to use the new environment.
 - Go to [PyPI](https://pypi.org/) and login;
   if you have no account there, create one first.
 - Configure a [trusted publisher](https://docs.pypi.org/trusted-publishers/adding-a-publisher/).
+- Go to `https://github.com/<YOUR_GITHUB_HANDLE>/<YOUR_PROJECT_SLUG>/settings/pages` set "Source" to "GitHub Actions".
 - Go to `https://github.com/<YOUR_GITHUB_HANDLE>/<YOUR_PROJECT_SLUG>/pull/1` and approve and (squash) merge the pull request.
 - Go to `https://github.com/<YOUR_GITHUB_HANDLE>/<YOUR_PROJECT_SLUG>/actions`;
   a GitHub Action should be running to create a GitHub release.
 - Wait for the workflows to finish, then two other GitHub workflows should spawn triggered by the creation the release;
-  these actions should publish you package to PyPI and prepare your documentation for publishing to GitHub Pages respectively;
-  the latter action should spawn another workflow that actually publishes your docs on GitHub Pages.
+  these actions should publish you package on PyPI and publish your documentation on GitHub Pages.
 - Wait until all actions finish.
 - Go to `https://github.com/<YOUR_GITHUB_HANDLE>/<YOUR_PROJECT_SLUG>/releases`;
   note that a release has been created.
