@@ -4,7 +4,7 @@ Some things in [usage](index.md#usage) might require a little more effort on the
 Let's go over the bootstrapping and the development cycle in full detail.
 
 In this walkthrough we are going to create a Python library and publish it to PyPI.
-While doing so we will do all the steps you would normally do during a feature development as well.
+While doing so we will do all the steps you would normally do during feature development as well.
 Also, we will publish the project's documentation to GitHub Pages.
 
 You are encouraged to go through this walkthrough twice.
@@ -17,13 +17,17 @@ Instructions:
 
 - Create a repository in GitHub;
   do not add any additional files upon creation, like .gitignore, LICENSE etc.;
-  make sure you take a project name not already on PyPI, if you want to follow this walkthrough all the way to publishing there.  
+  make sure you take a project name not already on PyPI, if you want to follow this walkthrough all the way to publishing there;
+  make sure you make the repo public, if you want to follow this walkthrough all the way to publishing the documentation on GitHub Pages.
 - Clone the repo to your development environment.
 - Execute this command from the directory directly above: `uvx cruft create -f --checkout latest https://github.com/schubergphilis/paleofuturistic_python`.
 - Answer the questions; `project_slug` should be the same as the GitHub repository name you chose.
-- cd to your project directory; execute `git add --all`, `git commit -m "initial commit"` and `git push`.
-- Navigate to `https://github.com/<YOUR_GITHUB_HANDLE>/<YOUR_PROJECT_SLUG>/actions`.
-- See that the quality assurance CI fails; you will fix this in the next instructions.
+- cd to your project directory; execute `git add --all` and `git commit -m "chore: initial commit"`.
+- Execute `uv sync --all-extras --dev`;
+  this gives multiline output and should state something about having downloaded and installed a lot of packages successfully.
+- Execute `git add --all` and `git commit -m "chore: lock initial dependencies"`.
+- Do not git push yet!
+  This would trigger CI which we will cover later.
 
 ### Managing boilerplate
 
@@ -49,17 +53,7 @@ Other options to get to the same state would be:
 If you had wanted another license than Apache, you have probably already chosen one and can easily override the templated one (if you do, do it in the `pyproject.toml` as well).
 Maybe take a look at the .gitignore, maybe not; it's fine; I promise.
 
-## Dependency management
-
-Instructions:
-
-- Get back to the command-line in your local clone.
-- Execute `uv sync --all-extras --dev`.
-- Execute `git add --all`, `git commit -m "lock initial dependencies"` and `git push`.
-- Navigate to `https://github.com/<YOUR_GITHUB_HANDLE>/<YOUR_PROJECT_SLUG>/actions`.
-- See that the quality assurance CI now succeeds; what it's exactly doing, you will find out in the next instructions.
-
-### Dependencies in environments
+### Dependency management
 
 Usually a lot or even more of the low-level functionality you need for what you want to develop is already available.
 Luckily, reeling that good stuff in is one of uv's strengths.
@@ -80,7 +74,6 @@ By now you might have already guessed that uv acts on dependencies in your envir
 
 Instructions:
 
-- Get back to the command-line in your local clone.
 - Execute `uv run ruff format --diff`; should output `4 files already formatted`.
 - Execute `uv run ruff check`; should output `All checks passed!`.
 - Execute `uv run mypy`; should output `Success: no issues found in 2 source files`.
@@ -104,16 +97,15 @@ And by that time you can probably figure out how to stop a pesky linter from und
 so my advice would be to not give it too much thought.
 (If you feel like getting into the weeds early though, [have at you](https://docs.astral.sh/ruff/configuration/).)
 
-Small thing worth mentioning is that the `pyproject.toml` is setup such that the ruff linter and formatter should not contradict each other.
+Small thing worth mentioning is that the `pyproject.toml` is set up such that the ruff linter and formatter should not contradict each other.
 Also, the activated linting rules are a little more than the default, mainly because isort is really convenient.
 
 ## Building your package
 
 Instructions:
 
-- Get back to the command-line in your local clone.
 - Execute `uv build`;
-  gives multiline output, should end with `Successfully built dist/<YOUR_PROJECT_SLUG>-0.1.0-py3-none-any.whl`.
+  gives multiline output, should end with `Successfully built dist/<YOUR_PROJECT_SLUG>-0.0.0-py3-none-any.whl`.
 - Execute `git status`;
   gives multiline output, should end with `nothing to commit, working tree clean`.
 
@@ -128,38 +120,27 @@ For that reason there is an upper limit in the `pyproject.toml` on uv's minor ve
 
 Other than that, this step should simply be a `uv build` command that just works.
 Locally you will probably only run this command to validate it works though.
-Eventually it's a pipeline that should build and publish.
+Eventually the project's pipelines should build and publish for you.
 
-## Previewing and publishing your documentation
+## Previewing your documentation
 
 Instructions:
 
-- Get back to the command-line in your local clone.
-- Execute `uvx --with mkdocstrings[python] mkdocs build`;
+- Execute `uv run mkdocs build`;
   gives multiline output, should end with `INFO    -  Documentation built in <X> seconds`.
-- Execute `uvx --with mkdocstrings[python] mkdocs serve`;
+- Execute `uv run mkdocs serve`;
   gives multiline output, should end with `INFO    -  <X> Serving on http://127.0.0.1:8000/`;
 - Navigate to `http://127.0.0.1:8000/`;
   some rudimentary documentation should be there.
 - Get back to the command-line in your local clone;
   terminate the serving process.
-- Execute `uvx --with mkdocstrings[python] mkdocs gh-deploy`;
-  gives multiline output, should end with `INFO    -  Your documentation should shortly be available at: https://<YOUR_GITHUB_HANDLE>.github.io/<YOUR_PROJECT_SLUG>/`.
-- Navigate to `https://github.com/<YOUR_GITHUB_HANDLE>/<YOUR_PROJECT_SLUG>/actions`;
-  a GitHub Action should be running to deploy you docs.
-- Wait until the action finishes then navigate to `https://<YOUR_GITHUB_HANDLE>.github.io/<YOUR_PROJECT_SLUG>/`;
-  it should display the same documentation you just served locally.
-- Get back to the command-line in your local clone.
 - Execute `git status`;
   gives multiline output, should end with `nothing to commit, working tree clean`.
 
 ### A very feature-rich static website
 
-Let's first explain a bit about that magic `--with` in the commands above.
-It injects additional dependencies into the environment in this case mkdocstrings with its python add-on.
-
-Now, in your project directory go to `docs/index.md` and see how little was needed to produce such a fantastic skeleton for documentation.
-You do need to keep every docstring nice and tidy to make that work though.
+In your project directory go to `docs/index.md` and see how little was needed to produce such a fantastic skeleton for documentation.
+(Of course, you do need to keep every relevant docstring nice and tidy to make that work.)
 I found mkdocstrings works best with numpy style docs, so that's the template's default.
 You can change that and more in the `mkdocs.yaml`.
 Don't try to understand all of that at once...
@@ -169,17 +150,67 @@ MkDocs offers far more than everything you accomplished above, especially combin
 Personal favorite out of the box: watch files.
 Others might particularly like automated publishing to other documentation hosting parties than GitHub Pages.
 
-## Publishing your Python package to PyPI
+## Continuous integration
 
 Instructions:
 
-- Navigate to `https://github.com/<YOUR_GITHUB_HANDLE>/<YOUR_PROJECT_SLUG>/settings/environments`.
-- Create an environment named `pypi`.
+- Navigate to `https://github.com/settings/personal-access-tokens`.
+- Generate a new token;
+  it should have access "Read and Write" on "Contents" and "Pull requests" on ONLY the repository you are working with now,
+  this will also automatically grant access "Read-only" on "Metadata".
+- Go to `https://github.com/<YOUR_GITHUB_HANDLE>/<YOUR_PROJECT_SLUG>/settings/environments/new` and create an environment called `release-please`.
+- Set "Deployment branches and tags" to only allow branch `main` to use the new environment.
+- Set `RELEASE_PLEASE_TOKEN` as an environment secret with the token you just generated.
+- Get back to the command-line in your local clone.
+- Execute `git commit --allow-empty -m "feat: release initial version"` and `git push`.
+- Navigate to `https://github.com/<YOUR_GITHUB_HANDLE>/<YOUR_PROJECT_SLUG>/actions`;
+  see that the "Quality Assurance CI" and "Release Please" workflows succeed.
+- Go to `https://github.com/<YOUR_GITHUB_HANDLE>/<YOUR_PROJECT_SLUG>/pull/1`;
+  see that Release Please created a pull request for you.
+
+### Release orchestration
+
+The quality assurance was already covered above.
+Having it in the CI helps keeping the main branch up to specs.
+A small side note is that the quality assurance CI also includes building the package and documentation.
+Whether this is part of QA or not is debatable, but it's clear you don't want to find build errors in your release pipelines.
+
+This template sets up your project to use [Release Please Action](https://github.com/googleapis/release-please-action) as release orchestrator.
+This unburdens you from updating the toml and lock files for each release, and remembering to update the documentation website.
+It also keeps a nice changelog and of course it creates GitHub releases.
+
+If you want Release Please to keep a nice looking changelog for you, then you have to be a little disciplined in naming your commits.
+Release Please expects commits to adhere to [Conventional Commits](https://www.conventionalcommits.org/).
+This is a good idea anyway, so that should be a reasonable demand.
+(When merging commits into the main branch with pull requests, it is probably easiest to make the PR title adhere to Conventional Commits and to 'squash merge'.)
+
+Sadly, Release Please does require a dedicated GitHub token to operate, because actions triggered from pull requests are too limited for this template when operating with the default GitHub token.
+The token is something quite sensitive to manage, because it breaks those (security) limits, but worth that effort.
+Be especially careful on new workflows that create toxic permission combinations which allow pull requests from strangers to escalate privileges.
+See the [extra guides](extra_guides.md#github-security-enhancements) on some more tips on securing your repository.
+
+## Publishing to PyPI and GitHub Pages
+
+- Navigate to `https://github.com/<YOUR_GITHUB_HANDLE>/<YOUR_PROJECT_SLUG>/settings/environments/new` and create an environment called `pypi`.
+- Set "Deployment branches and tags" to only allow tags `v*` to use the new environment.
 - Go to [PyPI](https://pypi.org/) and login;
   if you have no account there, create one first.
 - Configure a [trusted publisher](https://docs.pypi.org/trusted-publishers/adding-a-publisher/).
-- Go to `https://github.com/<YOUR_GITHUB_HANDLE>/<YOUR_PROJECT_SLUG>/actions/workflows/release.yaml` and run the workflow.
-- Wait for the workflow to finish, then get back to the command-line.
+- Go to `https://github.com/<YOUR_GITHUB_HANDLE>/<YOUR_PROJECT_SLUG>/settings/pages` set "Source" to "GitHub Actions".
+- Go to `https://github.com/<YOUR_GITHUB_HANDLE>/<YOUR_PROJECT_SLUG>/pull/1` and approve and (squash) merge the pull request.
+- Go to `https://github.com/<YOUR_GITHUB_HANDLE>/<YOUR_PROJECT_SLUG>/actions`;
+  a GitHub Action should be running to create a GitHub release.
+- Wait for the workflows to finish, then two other GitHub workflows should spawn triggered by the creation the release;
+  these actions should publish you package on PyPI and publish your documentation on GitHub Pages.
+- Wait until all actions finish.
+- Go to `https://github.com/<YOUR_GITHUB_HANDLE>/<YOUR_PROJECT_SLUG>/releases`;
+  note that a release has been created.
+- Get back to the command-line in your local clone.
+- Execute `git pull`;
+  note that a changelog was created and some versioning numbers were updated.
+- Navigate to `https://<YOUR_GITHUB_HANDLE>.github.io/<YOUR_PROJECT_SLUG>/`;
+  it should display the same documentation you served locally in the previous part.
+- Get back to the command-line in your local clone.
 - Execute `uv run --isolated --no-project --with <YOUR_PROJECT_SLUG> python -c "from <YOUR_PROJECT_SLUG> import hello; print(hello())"`;
   should output `Hello you from <YOUR_PROJECT_SLUG>!`.
 
@@ -188,7 +219,7 @@ Instructions:
 If all of the above worked, congratulations!
 Of course you are not reading this for just celebration, but you wanted to know more about what happened under the hood.
 
-uv also supports publishing from/to anywhere with credentials.
+uv supports publishing from/to anywhere with credentials.
 But, if possible, publishing with a trusted publisher unburdens you from credential management.
 
 In the `release.yaml`, note caching is explicitly disabled.
@@ -203,11 +234,6 @@ This walkthrough is getting very long already, so more on how to set that up is 
 Also in the extra guides you can find the [minimal steps](extra_guides.md#executable-apps) on how to build and publish a CLI from this template.
 Unless your project will be really simple (which it never will be), I would advise to make separate lib and app/cli projects for business logic and integration respectively.
 Otherwise you could just use a simple [script with inline dependencies](https://docs.astral.sh/uv/guides/scripts/#declaring-script-dependencies).
-
-> Final important note:
-> Before publishing a next version, don't forget to version bump in the `pyproject.toml` and forward that to the lockfile with `uv lock`.
-> Then of course git add, commit and push, and then you should be good to go for publishing again.
-> Hopefully these steps will be automated in a future version of this template.
 
 ## Bonus: the ptpython REPL
 
@@ -242,9 +268,8 @@ Now that you went through all the bootstrapping needed only once, your developme
     - Type check: `uv run mypy`
     - Test: `uv run python -m unittest`
 - Build: `uv build` (just to test it works)
-- Preview documentation: `uvx --with mkdocstrings[python] mkdocs serve`
-- Publish package: kickoff the Publish to PyPI workflow in GitHub Actions
-- Publish documentation: `uvx --with mkdocstrings[python] mkdocs gh-deploy`
+- Preview documentation: `uv run mkdocs serve`
+- Publish package and docs: approve the `chore(main): release x.x.x` pull request from Release Please
 
 Or even better, create your own workflow that exactly caters to your project's needs.
 

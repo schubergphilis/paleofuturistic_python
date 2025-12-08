@@ -32,9 +32,9 @@ Give their docs a look-over before continuing if you want to get a better unders
     - Type check: `uv run mypy`
     - Test: `uv run python -m unittest`
 - Build: `uv build`
-- Document: `uvx --with mkdocstrings[python] mkdocs build`
+- Document: `uv run mkdocs build`
 - Publish: `uv publish`
 
 Can it really be that simple?
-Well, eventually yes, but you will need to setup some connections and credentials still, of course.
+Well, eventually yes, but you will need to set up some connections and credentials still, of course.
 For a slightly more elaborate walkthrough on that, see the [docs](walkthrough.md).
