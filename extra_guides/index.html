@@ -147,16 +147,14 @@
 <h2 id="github-security-enhancements">GitHub security enhancements</h2>
 <p>Note you have just bestowed great power upon GitHub.
 With great power comes... No wait we have something serious to say here!</p>
-<p>If you followed the complete walkthrough from this template you will have already setup a separate GitHub env for publishing and made use of PyPI's trusted publishing.
+<p>If you followed the complete walkthrough from this template you will have already set up a separate GitHub env for publishing and made use of PyPI's trusted publishing.
 That's great, but it's advisable to put up an even higher fence against attacks.</p>
 <p>You can for example use the following settings to protect your repository from outsiders:</p>
 <ul>
-<li>Protect at least the <code>main</code> branch and <code>v*</code> tags with rulesets; configure them to enforce updates via peer-reviewed pull requests from forks.</li>
-<li>Edit the <code>pypi</code> environment so that only the protected branches and tags can use it.</li>
+<li>Protect at least the <code>main</code> branch and <code>v*</code> tags with rulesets;
+  for example enforce updates via peer-reviewed pull requests on <code>main</code>, and forbid deleting and editing tags.</li>
 <li>Enable "Limit to users explicitly granted read or higher access" under "Code review limits".</li>
 <li>Set "Require approval for all external contributors" under "Actions permissions" -&gt; "Approval for running fork pull request workflows from contributors".</li>
-<li>Set "Read repository contents and packages permissions" (no default repo write) under "Actions permissions" -&gt; "Workflow permissions".</li>
-<li>Uncheck "Allow GitHub Actions to create and approve pull requests" under "Actions permissions" -&gt; "Workflow permissions".</li>
 <li>You could even go as far as setting "Temporary interaction limits" under "Interaction limits".</li>
 </ul>
 <p>Protecting your repository from insider threats is far harder, but this might help:</p>
