@@ -9,9 +9,10 @@ authors = [
 requires-python = ">={{ cookiecutter.python_version }}"
 dependencies = []
 classifiers = [
+    {%- if cookiecutter.include_apache_license %}
     # License
     "License :: OSI Approved :: Apache Software License",
-
+    {%- endif %}
     # Python versions supported by the package
     "Programming Language :: Python :: {{ cookiecutter.python_version }}",
 ]

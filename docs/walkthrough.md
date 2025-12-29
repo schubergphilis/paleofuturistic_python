@@ -50,7 +50,8 @@ Other options to get to the same state would be:
 
 ### Reviewing .gitignore and LICENSE
 
-If you had wanted another license than Apache, you have probably already chosen one and can easily override the templated one (if you do, do it in the `pyproject.toml` as well).
+If you had wanted another license than Apache, you have probably already chosen one and can easily add one yourself.
+(If you do, add it to the `pyproject.toml` as well if it has a [PyPI-recognized classifier](https://pypi.org/classifiers/).)
 Maybe take a look at the .gitignore, maybe not; it's fine; I promise.
 
 ### Dependency management
