@@ -29,6 +29,12 @@ Protecting your repository from insider threats is far harder, but this might he
 - Set some "Required reviewers" under "Environments" -> "Deployment protection rules".
 - Cumbersome to implement, but effective: org/repo admin access only for non-personal accounts which require 4-eyes approval for assuming.
 
+Protecting your repository is important, even more so when it's hooked up to CI/CD.
+GitHub security is a subject by itself.
+Do not just rely on the checklist above.
+Think about your own situation, and implement the checks and balances you think are necessary.
+As always, the internet can help you with thinking.
+
 ## Executable apps
 
 > You may need to flush uv's cache after implementing the code below before the commands will work.

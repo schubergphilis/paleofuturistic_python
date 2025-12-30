@@ -155,17 +155,12 @@ Others might particularly like automated publishing to other documentation hosti
 
 Instructions:
 
-- Navigate to `https://github.com/settings/personal-access-tokens`.
-- Generate a new token;
-  it should have access "Read and Write" on "Contents" and "Pull requests" on ONLY the repository you are working with now,
-  this will also automatically grant access "Read-only" on "Metadata".
-- Go to `https://github.com/<YOUR_GITHUB_HANDLE>/<YOUR_PROJECT_SLUG>/settings/environments/new` and create an environment called `release-please`.
-- Set "Deployment branches and tags" to only allow branch `main` to use the new environment.
-- Set `RELEASE_PLEASE_TOKEN` as an environment secret with the token you just generated.
+- Navigate to `https://github.com/<YOUR_GITHUB_HANDLE>/<YOUR_PROJECT_SLUG>/settings/actions`.
+- Check "Allow GitHub Actions to create and approve pull requests" and save the changes.
 - Get back to the command-line in your local clone.
 - Execute `git commit --allow-empty -m "feat: release initial version"` and `git push`.
 - Navigate to `https://github.com/<YOUR_GITHUB_HANDLE>/<YOUR_PROJECT_SLUG>/actions`;
-  see that the "Quality Assurance CI" and "Release Please" workflows succeed.
+  see that the "Quality Assurance CI" and "Release Orchestration" workflows succeed.
 - Go to `https://github.com/<YOUR_GITHUB_HANDLE>/<YOUR_PROJECT_SLUG>/pull/1`;
   see that Release Please created a pull request for you.
 
@@ -185,15 +180,18 @@ Release Please expects commits to adhere to [Conventional Commits](https://www.c
 This is a good idea anyway, so that should be a reasonable demand.
 (When merging commits into the main branch with pull requests, it is probably easiest to make the PR title adhere to Conventional Commits and to 'squash merge'.)
 
-Sadly, Release Please does require a dedicated GitHub token to operate, because actions triggered from pull requests are too limited for this template when operating with the default GitHub token.
-The token is something quite sensitive to manage, because it breaks those (security) limits, but worth that effort.
-Be especially careful on new workflows that create toxic permission combinations which allow pull requests from strangers to escalate privileges.
-See the [extra guides](extra_guides.md#github-security-enhancements) on some more tips on securing your repository.
+Sadly, GitHub does not allow the results from GitHub Actions with the default token and triggered by a pull request to trigger further GitHub Actions.
+This makes the `release.yaml` a bit overcrowded.
+The easiest alternative is feeding the Release Please Action a custom PAT.
+Otherwise, you have to write a whole CI/CD system around your repository.
+Pick your poison...
+
+If you want the release automation to do more than what this template provides, you will have to write it in the `release.yaml` as well or go the other routes.
 
 ## Publishing to PyPI and GitHub Pages
 
 - Navigate to `https://github.com/<YOUR_GITHUB_HANDLE>/<YOUR_PROJECT_SLUG>/settings/environments/new` and create an environment called `pypi`.
-- Set "Deployment branches and tags" to only allow tags `v*` to use the new environment.
+- Set "Deployment branches and tags" to allow only the `main` branch to use the new environment.
 - Go to [PyPI](https://pypi.org/) and login;
   if you have no account there, create one first.
 - Configure a [trusted publisher](https://docs.pypi.org/trusted-publishers/adding-a-publisher/).
@@ -228,9 +226,8 @@ This makes the release step more dependable, because by accident wrong dependenc
 Also deliberately by the way, so this is also a security measure.
 If you want to know more, lookup something like: GitHub Actions cache poisoning.
 
-Setting the `pypi` environment did not add security in the steps above.
-You can (and should) use it for that way though.
-This walkthrough is getting very long already, so more on how to set that up is in the [extra guides](extra_guides.md#github-security-enhancements).
+Setting the `pypi` environment adds a bit of security by preventing other workflows from touching PyPI.
+Some more advises on GitHub security can be found in the [extra guides](extra_guides.md#github-security-enhancements).
 
 Also in the extra guides you can find the [minimal steps](extra_guides.md#executable-apps) on how to build and publish a CLI from this template.
 Unless your project will be really simple (which it never will be), I would advise to make separate lib and app/cli projects for business logic and integration respectively.
