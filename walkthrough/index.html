@@ -199,7 +199,8 @@ Because we just cloned an empty repository, we can assume to be safe though.</p>
 <li>create the project with directory from the template with cruft, copy the contents to a cloned repository; git add all, commit and push.</li>
 </ul>
 <h3 id="reviewing-gitignore-and-license">Reviewing .gitignore and LICENSE</h3>
-<p>If you had wanted another license than Apache, you have probably already chosen one and can easily override the templated one (if you do, do it in the <code>pyproject.toml</code> as well).
+<p>If you had wanted another license than Apache, you have probably already chosen one and can easily add one yourself.
+(If you do, add it to the <code>pyproject.toml</code> as well if it has a <a href="https://pypi.org/classifiers/">PyPI-recognized classifier</a>.)
 Maybe take a look at the .gitignore, maybe not; it's fine; I promise.</p>
 <h3 id="dependency-management">Dependency management</h3>
 <p>Usually a lot or even more of the low-level functionality you need for what you want to develop is already available.
@@ -284,17 +285,12 @@ Others might particularly like automated publishing to other documentation hosti
 <h2 id="continuous-integration">Continuous integration</h2>
 <p>Instructions:</p>
 <ul>
-<li>Navigate to <code>https://github.com/settings/personal-access-tokens</code>.</li>
-<li>Generate a new token;
-  it should have access "Read and Write" on "Contents" and "Pull requests" on ONLY the repository you are working with now,
-  this will also automatically grant access "Read-only" on "Metadata".</li>
-<li>Go to <code>https://github.com/&lt;YOUR_GITHUB_HANDLE&gt;/&lt;YOUR_PROJECT_SLUG&gt;/settings/environments/new</code> and create an environment called <code>release-please</code>.</li>
-<li>Set "Deployment branches and tags" to only allow branch <code>main</code> to use the new environment.</li>
-<li>Set <code>RELEASE_PLEASE_TOKEN</code> as an environment secret with the token you just generated.</li>
+<li>Navigate to <code>https://github.com/&lt;YOUR_GITHUB_HANDLE&gt;/&lt;YOUR_PROJECT_SLUG&gt;/settings/actions</code>.</li>
+<li>Check "Allow GitHub Actions to create and approve pull requests" and save the changes.</li>
 <li>Get back to the command-line in your local clone.</li>
 <li>Execute <code>git commit --allow-empty -m "feat: release initial version"</code> and <code>git push</code>.</li>
 <li>Navigate to <code>https://github.com/&lt;YOUR_GITHUB_HANDLE&gt;/&lt;YOUR_PROJECT_SLUG&gt;/actions</code>;
-  see that the "Quality Assurance CI" and "Release Please" workflows succeed.</li>
+  see that the "Quality Assurance CI" and "Release Orchestration" workflows succeed.</li>
 <li>Go to <code>https://github.com/&lt;YOUR_GITHUB_HANDLE&gt;/&lt;YOUR_PROJECT_SLUG&gt;/pull/1</code>;
   see that Release Please created a pull request for you.</li>
 </ul>
@@ -310,14 +306,16 @@ It also keeps a nice changelog and of course it creates GitHub releases.</p>
 Release Please expects commits to adhere to <a href="https://www.conventionalcommits.org/">Conventional Commits</a>.
 This is a good idea anyway, so that should be a reasonable demand.
 (When merging commits into the main branch with pull requests, it is probably easiest to make the PR title adhere to Conventional Commits and to 'squash merge'.)</p>
-<p>Sadly, Release Please does require a dedicated GitHub token to operate, because actions triggered from pull requests are too limited for this template when operating with the default GitHub token.
-The token is something quite sensitive to manage, because it breaks those (security) limits, but worth that effort.
-Be especially careful on new workflows that create toxic permission combinations which allow pull requests from strangers to escalate privileges.
-See the <a href="../extra_guides/#github-security-enhancements">extra guides</a> on some more tips on securing your repository.</p>
+<p>Sadly, GitHub does not allow the results from GitHub Actions with the default token and triggered by a pull request to trigger further GitHub Actions.
+This makes the <code>release.yaml</code> a bit overcrowded.
+The easiest alternative is feeding the Release Please Action a custom PAT.
+Otherwise, you have to write a whole CI/CD system around your repository.
+Pick your poison...</p>
+<p>If you want the release automation to do more than what this template provides, you will have to write it in the <code>release.yaml</code> as well or go the other routes.</p>
 <h2 id="publishing-to-pypi-and-github-pages">Publishing to PyPI and GitHub Pages</h2>
 <ul>
 <li>Navigate to <code>https://github.com/&lt;YOUR_GITHUB_HANDLE&gt;/&lt;YOUR_PROJECT_SLUG&gt;/settings/environments/new</code> and create an environment called <code>pypi</code>.</li>
-<li>Set "Deployment branches and tags" to only allow tags <code>v*</code> to use the new environment.</li>
+<li>Set "Deployment branches and tags" to allow only the <code>main</code> branch to use the new environment.</li>
 <li>Go to <a href="https://pypi.org/">PyPI</a> and login;
   if you have no account there, create one first.</li>
 <li>Configure a <a href="https://docs.pypi.org/trusted-publishers/adding-a-publisher/">trusted publisher</a>.</li>
@@ -348,9 +346,8 @@ But, if possible, publishing with a trusted publisher unburdens you from credent
 This makes the release step more dependable, because by accident wrong dependencies could end up in the cache.
 Also deliberately by the way, so this is also a security measure.
 If you want to know more, lookup something like: GitHub Actions cache poisoning.</p>
-<p>Setting the <code>pypi</code> environment did not add security in the steps above.
-You can (and should) use it for that way though.
-This walkthrough is getting very long already, so more on how to set that up is in the <a href="../extra_guides/#github-security-enhancements">extra guides</a>.</p>
+<p>Setting the <code>pypi</code> environment adds a bit of security by preventing other workflows from touching PyPI.
+Some more advises on GitHub security can be found in the <a href="../extra_guides/#github-security-enhancements">extra guides</a>.</p>
 <p>Also in the extra guides you can find the <a href="../extra_guides/#executable-apps">minimal steps</a> on how to build and publish a CLI from this template.
 Unless your project will be really simple (which it never will be), I would advise to make separate lib and app/cli projects for business logic and integration respectively.
 Otherwise you could just use a simple <a href="https://docs.astral.sh/uv/guides/scripts/#declaring-script-dependencies">script with inline dependencies</a>.</p>
